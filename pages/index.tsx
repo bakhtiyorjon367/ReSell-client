@@ -7,6 +7,7 @@ import Categories from '../libs/components/homepage/Categories';
 import FreeItems from '../libs/components/homepage/FreeItems';
 import Furniture from '../libs/components/homepage/Furniture';
 import WomenFashion from '../libs/components/homepage/WomenFashion';
+import PopularProducts from '../libs/components/homepage/PopularProducts';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -28,6 +29,7 @@ const Home: NextPage = () => {
 			<Stack className={'home-page'}>
 				<Categories/>
 				<FreeItems/>
+				<PopularProducts/>
 				<Furniture/>
 				<WomenFashion/>
 			</Stack>
