@@ -12,7 +12,7 @@ import { Product } from "../../types/product/product";
 import { ProductsInquiry } from "../../types/product/product.input";
 import { LIKE_TARGET_PRODUCT } from "../../../apollo/user/mutation";
 import { Message } from '../../enums/common.enum';
-import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from "../../sweetAlert";
+import { sweetMixinErrorAlert } from "../../sweetAlert";
 interface FreeItemsProps{
     initialInput: ProductsInquiry;
 };

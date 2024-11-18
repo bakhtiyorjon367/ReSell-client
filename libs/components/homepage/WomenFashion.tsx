@@ -12,8 +12,8 @@ import { useMutation, useQuery } from "@apollo/client";
 import { T } from "../../types/common";
 import { LIKE_TARGET_PRODUCT } from "../../../apollo/user/mutation";
 import { Message } from "../../enums/common.enum";
-import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from "../../sweetAlert";
-import { ProductCategory, ProductLocation } from "../../enums/product.enum";
+import { sweetMixinErrorAlert } from "../../sweetAlert";
+import { ProductCategory } from "../../enums/product.enum";
 
 interface WomenFashionProps{
     initialInput: ProductsInquiry;
@@ -49,8 +49,7 @@ const WomenFashion= (props:WomenFashionProps) => {
                 variables:{input: id}
             });
             await getWomenFashionRefetch({input:initialInput});
-
-            await sweetTopSmallSuccessAlert("success", 800);
+            
         }catch(err:any){
             console.log("ERROR, likeTargetProductHandler", err.message);
             sweetMixinErrorAlert(err.message).then();

@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Divider, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import IconButton from "@mui/material/IconButton";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
@@ -26,8 +26,7 @@ const FreeItemsCard = (props:FreeItemsCardProps) =>{
     return (
         <Stack className="top-card-box" style={{ backgroundImage: `url(${REACT_APP_API_URL}/${product?.productImages[0]})` }}
         onClick={() => {pushDetailHandler(product._id)}}
-        >
-            
+        >   
             <Box className={"info"}>
                     <div className="view-like-box">
                         <div>

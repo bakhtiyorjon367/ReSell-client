@@ -11,7 +11,7 @@ export enum Message {
     NO_MEMBER_NICK = "No member with that member nick!",
     BLOCKED_USER = "You have been blocked",
     WRONG_PASSWORD ="Wrong password!",
-    NOT_AUTHENTICATED = "You are not authenticated, Please please login first!",
+    NOT_AUTHENTICATED = "Please please login first!",
     TOKEN_NOT_EXIST = "Bearer token is not provided!",
     ONLY_SPECIFIC_ROLES_ALLOWED = 'Allowed for only members with specific roles!',
     NOT_ALLOWED_REQUEST = 'Not Allowed Request!',

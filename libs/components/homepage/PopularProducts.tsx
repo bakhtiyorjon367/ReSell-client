@@ -12,7 +12,6 @@ import { T } from "../../types/common";
 import { LIKE_TARGET_PRODUCT } from "../../../apollo/user/mutation";
 import { Message } from "../../enums/common.enum";
 import { sweetMixinErrorAlert } from "../../sweetAlert";
-import { ProductCategory } from "../../enums/product.enum";
 import PopularProductsCard from "./PopularProductsCard";
 
 interface PopularProductsProps{
