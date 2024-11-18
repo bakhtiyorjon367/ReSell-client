@@ -58,7 +58,6 @@ const ProductList: NextPage = ({ initialInput, ...props }: any) => {
 			const inputObj = JSON.parse(router?.query?.input as string);
 			setSearchFilter(inputObj);
 		}
-
 		setCurrentPage(searchFilter.page === undefined ? 1 : searchFilter.page);
 	}, [router]);
 
@@ -66,17 +65,6 @@ const ProductList: NextPage = ({ initialInput, ...props }: any) => {
 		 getProductsRefetch({input: searchFilter}).then();
 	}, [searchFilter]);
 
-	/** LIFECYCLES **/
-	useEffect(() => {
-		if (router.query.input) {
-			const inputObj = JSON.parse(router?.query?.input as string);
-			setSearchFilter(inputObj);
-		}
-
-		setCurrentPage(searchFilter.page === undefined ? 1 : searchFilter.page);
-	}, [router]);
-
-	useEffect(() => {}, [searchFilter]);
 
 	/** HANDLERS **/
 	const likeProductHandler = async(user:T, id:string) => {
@@ -88,14 +76,33 @@ const ProductList: NextPage = ({ initialInput, ...props }: any) => {
 			await likeTargetProduct({
 				variables:{input: id}
 			});
-			await getProductsRefetch({input:initialInput});
+
+			const currentParams = parseQueryParams();
+
+			if (currentParams) {
+			  await getProductsRefetch({
+				input: currentParams
+			  });
+			}
 	
-			await sweetTopSmallSuccessAlert("success", 800);
 		}catch(err:any){
 			console.log("ERROR, likeTargetProductHandler", err.message);
 			sweetMixinErrorAlert(err.message).then();
 		}
-	}	
+	};
+	
+	const parseQueryParams = () => {
+		const input = router.query.input;
+	
+		if (Array.isArray(input)) {
+			return JSON.parse(input[0]);
+		  } else if (typeof input === 'string') {
+			return JSON.parse(input);
+		  }
+	
+		return null;
+	  };
+
 
 	const handlePaginationChange = async (event: ChangeEvent<unknown>, value: number) => {
 		searchFilter.page = value;

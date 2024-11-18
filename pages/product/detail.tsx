@@ -141,20 +141,37 @@ const ProductDetail: NextPage = ({ initialComment, ...props }: any) => {
 		}
 	}, [commentInquiry]);
 
+	const { loading, error, data } = useQuery(GET_PRODUCT, {
+        variables: { input: productId },
+        skip: !productId, // Skip query if productId is not set
+        fetchPolicy: 'network-only', // Ensure fresh data
+    });
+
+    // Update product state when data changes
+    useEffect(() => {
+        if (data && data.getProduct) {
+            setProduct(data.getProduct);
+        }
+    }, [data]);
+
+
 	/** HANDLERS **/
 	const likeProductHandler = async(user:T, id:string) => {
 		try{
 			if(!id) return;
 			if(!user._id) throw new Error(Message.NOT_AUTHENTICATED);
-			//likeTargetProduct Mutation
+
 			await likeTargetProduct({
 				variables:{input: id}
 			});
 			await getProductsRefetch({
 				variables:{input: id}
 			});
+			
+			await getProductRefetch({
+				variables:{input: product?._id}
+			});
 
-			await sweetTopSmallSuccessAlert("success", 800);
 		}catch(err:any){
 			console.log("ERROR, likeTargetProductHandler", err.message);
 			sweetMixinErrorAlert(err.message).then();
@@ -206,15 +223,16 @@ const ProductDetail: NextPage = ({ initialComment, ...props }: any) => {
 									</Stack>
 								</Stack>
 								<Stack className={'right-box'}>
-											{product?.meLiked && product?.meLiked[0]?.myFavorite ? (
-												<FavoriteIcon color="primary" fontSize={'medium'} />
-											) : (
-												<FavoriteBorderIcon
-													fontSize={'medium'}
-													// @ts-ignore
-													onClick={() => likeProductHandler(user, product?._id)}
-												/>
-											)}
+									{product?.meLiked && product?.meLiked[0]?.myFavorite ? (
+										<FavoriteIcon color="primary" fontSize={'medium'} />
+									) : (
+										<FavoriteBorderIcon
+											color='secondary'
+											fontSize={'medium'}
+											// @ts-ignore
+											onClick={() => likeProductHandler(user, product?._id)}
+										/>
+									)}
 								</Stack>
 							</Stack>
 							<Stack className={'images'}>
