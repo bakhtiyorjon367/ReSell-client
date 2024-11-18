@@ -7,6 +7,8 @@
     .container {
       display: flex;
       flex-direction: column;
+      min-height: 1100px;
+      margin-top: 50px;
       .cs-main-info {
         display: flex;
         flex-direction: column;
@@ -15,7 +17,7 @@
           flex-direction: column;
           align-items: center;
           span {
-            color: #000;
+            color: #c5c2c2;
             font-family: $font;
             font-size: 35px;
             font-style: normal;
@@ -26,7 +28,7 @@
           p {
             color: #757575;
             font-family: $font;
-            font-size: 16px;
+            font-size: 22px;
             font-style: normal;
             font-weight: 400;
             line-height: normal;
@@ -49,7 +51,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            border: 1px solid #EEE;
+            border: 1px solid #767575;
             cursor: pointer;
             color: #BDBDBD;
             font-family: $font;
@@ -59,8 +61,8 @@
             line-height: normal;
             letter-spacing: 0.42px;
             &.active {
-              border: 1px solid #725CE8;
-              background: #EB6753;
+              border: 2px solid #bbb6b6;
+              background: #888585;
               color: #FFF;
             }
           }
@@ -72,7 +74,7 @@
         flex-direction: column;
         .title {
           margin-bottom: 25px;
-          color: #000;
+          color: #c5c2c2;
           font-family: $font;
           font-size: 27px;
           font-style: normal;
@@ -88,16 +90,16 @@
         }
         .notice-content {
           .main {
-            border: 1px solid #EEE;
+            border: 1px solid #787777;
             .top {
               padding: 25px 33px;
               display: flex;
               flex-direction: row;
               justify-content: space-between;
               span {
-                color: #000;
+                color: #c5c2c2;
                 font-family: $font;
-                font-size: 14px;
+                font-size: 21px;
                 font-style: normal;
                 font-weight: 400;
                 line-height: normal;
@@ -112,43 +114,41 @@
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
-                border: 1px solid #EEE;
-                &.event {
-                  background: #F6D79A;
-                }
+                border-bottom: 0.5px solid #636262;
+                background: #ffffff;
                 div {
                   padding: 6px 9px;
-                  border-radius: 12px;
+                  border-radius: 15px;
                   border: 1px solid #EB6753;
                   color: #EB6753;
                   font-family: $font;
-                  font-size: 12px;
+                  font-size: 18px;
                   font-style: normal;
                   font-weight: 400;
                 }
                 .notice-number {
                   margin-left: 18px;
                   width: 39px;
-                  color: #BDBDBD;
+                  color: #242424;
                   font-family: $font;
-                  font-size: 14px;
+                  font-size: 20px;
                   font-style: normal;
-                  font-weight: 400;
+                  font-weight: 300;
                   line-height: normal;
                 }
                 .notice-title {
                   width: 1060px;
-                  color: #000;
+                  color: #0e0e0e;
                   font-family: $font;
-                  font-size: 16px;
+                  font-size: 22px;
                   font-style: normal;
                   font-weight: 400;
                   line-height: normal;
                 }
                 .notice-date {
-                  color: #BDBDBD;
+                  color: #000000;
                   font-family: $font;
-                  font-size: 14px;
+                  font-size: 16px;
                   font-style: normal;
                   font-weight: 400;
                   line-height: normal;
@@ -173,26 +173,27 @@
               display: flex;
               justify-content: center;
               align-items: center;
-              color: #BDBDBD;
+              color: #8a8888;
               text-align: center;
               font-family: $font;
-              font-size: 15px;
+              font-size: 22px;
               font-style: normal;
-              font-weight: 400;
+              font-weight: 500;
               line-height: normal;
               letter-spacing: -0.225px;
               cursor: pointer;
               &.active {
-                border-bottom: 1px solid #EB6753;
-                color: #EB6753;
+                border-bottom: 1px solid #ffffff;
+                color: #ffffff;
+                
               }
             }
           }
           .wrap {
             margin-top: 50px;
             .MuiAccordionDetails-root {
-              padding: 30px 20px;
-              background: #FAFAFA;
+              padding: 30px 0;
+              background: #d7d6d6;
             }
             .badge {
               margin: 0 24px;
@@ -204,8 +205,17 @@
             }
             .question {
               .badge {
-                background: #e92C28;
-                color: #fff;
+                background: #343434;
+                color: #ffffff;
+                font-size: 22px;
+              }
+              .content{
+                color: #000000;
+                font-family: $font;
+                font-size: 22px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
               }
             }
             .answer {
@@ -215,8 +225,13 @@
               align-items: center;
               flex-direction: row;
               .badge {
-                color: #EB6753;
-                border: 1px solid #EB6753;
+                color: #090909;
+                border: 1px solid #969493;
+                font-size: 22px;
+              }
+              .content{
+                color: rgb(6, 6, 6);
+                font-size: 20px;
               }
             }
           }

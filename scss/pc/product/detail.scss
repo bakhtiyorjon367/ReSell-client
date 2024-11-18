@@ -1,0 +1,449 @@
+#pc-wrap {
+	#product-detail-page {
+		position: relative;
+		background: #252525;
+		padding-top: 100px;
+		padding-bottom: 200px;
+		.product-detail-config {
+			width: 100%;
+			height: auto;
+			padding-top: 56px;
+			gap: 30px;
+			.product-info-config {
+				width: 100%;
+				height: auto;
+				.info {
+					width: 100%;
+					height: auto;
+					flex-direction: row;
+					justify-content: space-between;
+					.left-box {
+						width: 50%;
+						height: auto;
+						.title-main {
+							color: #fff;
+							font-family: $font;
+							font-size: 30px;
+							font-style: normal;
+							font-weight: 400;
+							line-height: normal;
+							letter-spacing: 0.6px;
+							text-transform: capitalize;
+						}
+						.top-box {
+							width: auto;
+							height: auto;
+							flex-direction: row;
+							align-items: center;
+							gap: 10px;
+							margin-bottom: 17px;
+							.city {
+								color: #dad4d4;
+								font-family: $font;
+								font-size: 13px;
+								font-style: normal;
+								font-weight: 400;
+								line-height: normal;
+							}
+							.divider {
+								width: 1px;
+								height: 20px;
+								background: #dad4d4;
+							}
+							
+							.date {
+								color: #dad4d4;
+								font-family: $font;
+								font-size: 15px;
+								font-style: normal;
+								font-weight: 400;
+								line-height: 28px;
+							}
+						}
+						
+					}
+					.right-box {
+						margin-right: 20px;
+						margin-top: 20px;
+						svg {
+							width: 50px;
+							height: 40px;
+							cursor: pointer;
+						}
+					}
+				}
+				.images {
+					width: 100%;
+					height: 1000px;
+					gap: 10px;
+					.main-image {
+						width: 100%;
+						height: 800px;
+						img {
+							width: 100%;
+							height: 100%;
+							object-fit:fill;
+							border-radius: 12px;
+						}
+					}
+					.image-info {
+						width: 100%;
+						flex-direction: row;
+						gap: 18px;
+						margin-top: 25px;
+						img {
+							width: 95px;
+							height: 95px;
+							border-radius: 50%;
+							object-fit: cover;
+						}
+						.name-phone-listings {
+							gap: 5px;
+							.name {
+								color: #dfe0e4;
+								font-family: $font;
+								font-size: 25px;
+								font-style: normal;
+								font-weight: 600;
+								line-height: normal;
+							}
+							.phone-number {
+								width: 100%;
+								flex-direction: row;
+								align-items: center;
+								gap: 10px;
+								.number {
+									color: #d7d9df;
+									font-family: $font;
+									font-size: 20px;
+									font-style: normal;
+									font-weight: 400;
+									line-height: 28px;
+								}
+							}
+							.listings {
+								color: #cacbcd;
+								font-family: $font;
+								font-size: 20px;
+								font-style: normal;
+								font-weight: 400;
+								line-height: normal;
+								text-decoration-line: underline;
+							}
+						}
+					}
+				}
+				.divider{
+					width: 100%;
+					border: 0.5px rgb(50, 49, 49) solid;
+					margin-top: -35px;
+				}
+			}
+			.product-desc-config {
+				width: 100%;
+				height: auto;
+				flex-direction: row;
+				.left-config {
+					width: 100%;
+					height: auto;
+					.prop-desc-config {
+						width: 100%;
+						height: auto;
+						border-radius: 12px;
+						gap:10px;
+						.top {
+							width: 100%;
+							height: auto;
+							.title {
+								color: #eeeef0;
+								font-family: $font;
+								font-size: 20px;
+								font-style: normal;
+								font-weight: 500;
+								line-height: normal;
+								margin-bottom: 10px;
+							}
+							.desc {
+								color: #dedede;
+								font-family: $font;
+								font-size: 20px;
+								font-style: normal;
+								font-weight: 400;
+								line-height: 26px;
+							}
+							.category{
+								width: 88px;
+								color: #817e7e;
+								font-family: $font;
+								font-size: 18px;
+								text-decoration: underline;
+							}
+							.price {
+								margin-top: 30px;
+								width: 88px;
+								color: #ececec;
+								font-family: $font;
+								font-size: 25px;
+								font-style: normal;
+								font-weight: 400;
+								line-height: 35px;
+							}
+						.statistics {
+								.buttons {
+									width: auto;
+									height: auto;
+									flex-direction: row;
+									align-items: center;
+									gap: 15px;
+									margin: 30px 20px 27px 0;
+									p {
+										color: #ececec;
+										text-align: right;
+										font-family: $font;
+										font-size: 18px;
+										font-style: normal;
+										font-weight: 400;
+										line-height: normal;
+										letter-spacing: 0.52px;
+										text-transform: capitalize;
+									}
+									.button-box {
+										flex-direction: row;
+										gap: 5px;
+										align-items: center;
+										div{
+											color: #b5b4b4;
+											text-align: right;
+											font-family: $font;
+											font-size: 18px;
+											font-style: normal;
+											font-weight: 400;
+											line-height: normal;
+											letter-spacing: 0.82px;
+											text-transform: capitalize;
+										}
+									}
+								}
+							}
+
+						}
+						.divider{
+							width: 100%;
+							border: 1px rgb(120, 117, 117) solid;
+							margin-bottom: 30px;
+							
+						}
+					}
+					.address-config {
+						width: 100%;
+						height: auto;
+						gap: 10px;
+						border-radius: 12px;
+						.dealing{
+							width: 100%;
+							padding: 0 20px  0 10px ;
+							display: flex;
+							flex-direction: row;
+							justify-content: space-between;
+							.title {
+								color: #fff;
+								font-family: $font;
+								font-size: 20px;
+								font-style: normal;
+								font-weight: 600;
+								line-height: normal;
+							}
+						}
+						.map-box {
+							width: 100%;
+							height: 600px;
+							iframe {
+								border-radius: 12px;
+							}
+						}
+					}
+					.reviews-config {
+						width: 100%;
+						height: auto;
+						padding: 100px 0px 0px 0px;
+						.filter-box {
+							width: 100%;
+							height: auto;
+							flex-direction: row;
+							justify-content: space-between;
+							margin-bottom: 30px;
+							.review-cnt {
+								width: auto;
+								height: auto;
+								flex-direction: row;
+								align-items: center;
+								gap: 12px;
+								.reviews {
+									width: 153.6px;
+									color: #d5d3d3;
+									font-family: $font;
+									font-size: 17px;
+									font-style: normal;
+									font-weight: 600;
+									line-height: normal;
+								}
+							}
+						}
+						.review-list {
+							width: 100%;
+							height: auto;
+							gap: 20px;
+							border: 0.5px rgb(60, 59, 59) solid;
+							padding: 10px 10px;
+							.review-config {
+								width: 100%;
+								height: auto;
+								padding-bottom: 10px;
+								display: flex;
+								flex-direction: row;
+								justify-content: space-around;
+								.review-mb-info {
+									width: 100%;
+									height: auto;
+									flex-direction: row;
+									justify-content: space-between;
+									.img-name-box {
+										width: 30%;
+										flex-direction: row;
+										gap: 10px;
+										.img-box {
+											width: 65px;
+											height: 65px;
+											align-items: center;
+											justify-content: center;
+											border-radius: 50%;
+											border: 1px solid #908f8f;
+											object-fit: cover;
+										}
+										.name {
+											width: 100%;
+											color: #818286;
+											font-family: $font;
+											font-size: 15px;
+											font-weight: 700;
+											line-height: normal;
+											cursor: pointer;
+										}
+										.date {
+											width: 100%;
+											color: #8f9093;
+											font-family: $font;
+											font-size: 13px;
+											font-style: normal;
+											font-weight: 400;
+											line-height: normal;
+										}
+										.description {
+											color: #e3e3e3;
+											font-family: $font;
+											font-size: 24px;
+											font-style: normal;
+											font-weight: 400;
+											line-height: 26px;
+											border-bottom: 0.5px solid #545353;
+										}
+									}
+								}
+							}
+							.pagination-box {
+								width: 100%;
+								height: auto;
+								display: flex;
+								justify-content: center;
+							}
+						}
+					}
+					.leave-review-config {
+						textarea {
+							width: 100%;
+							height: 80px;
+							margin-top: 8px;
+							padding: 20px;
+							border-radius: 8px;
+							color: #f3f1f1;
+							background-color: #8f8c8c;
+							font-family: $font;
+							font-size: 24px;
+							font-style: normal;
+							font-weight: 400;
+							line-height: 26px;
+						}
+						.submit-btn {
+							width: 200px;
+							margin-top: 5px;
+							justify-content: flex-end;
+							border: 0.5px solid white;
+							border-radius: 5px;
+							background-color: #797777;
+							cursor: pointer;
+							.submit-review {
+								padding: 15px 40px;
+								cursor: pointer;
+								.title {
+									color: #b7b7b9;
+									font-family: $font;
+									font-size: 20px;
+									font-style: normal;
+									font-weight: 600;
+									line-height: normal;
+								}
+							}
+						}
+					}
+				}
+			}
+			.similar-products-config {
+				width: 100%;
+				margin-top: 200px;
+				gap: 30px;
+				.title-pagination-box {
+					width: 100%;
+					height: auto;
+					flex-direction: row;
+					justify-content: space-between;
+					align-items: flex-end;
+					.title-box {
+						width: 30%;
+						.main-title {
+							color: #e3e2e2;
+							font-family: $font;
+							font-size: 30px;
+							font-style: normal;
+							font-weight: 600;
+							line-height: normal;
+							letter-spacing: 0.6px;
+						}
+						.sub-title {
+							color: #181a20;
+							font-family: $font;
+							font-size: 14px;
+							font-style: normal;
+							font-weight: 400;
+							line-height: 26px;
+						}
+					}
+					.pagination-box {
+						flex-direction: row;
+						align-items: center;
+						gap: 22px;
+					}
+				}
+				.cards-box {
+					width: 100%;
+					padding-bottom: 10px;
+					.similar-homes-swiper {
+						width: 100%;
+						.similar-homes-slide {
+							width: 411px;
+						}
+					}
+				}
+			}
+		}
+	}
+}

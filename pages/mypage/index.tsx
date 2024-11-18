@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
-import { Stack } from '@mui/material';
+import { Divider, Stack } from '@mui/material';
 import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
-import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
-import MyProperties from '../../libs/components/mypage/MyProperties';
+import MyProducts from '../../libs/components/mypage/MyProducts';
 import MyFavorites from '../../libs/components/mypage/MyFavorites';
 import RecentlyVisited from '../../libs/components/mypage/RecentlyVisited';
-import AddProperty from '../../libs/components/mypage/AddNewProperty';
+import AddProduct from '../../libs/components/mypage/AddNewProduct';
 import MyProfile from '../../libs/components/mypage/MyProfile';
 import MyArticles from '../../libs/components/mypage/MyArticles';
 import { useReactiveVar } from '@apollo/client';
@@ -18,6 +17,7 @@ import MemberFollowers from '../../libs/components/member/MemberFollowers';
 import { sweetErrorHandling } from '../../libs/sweetAlert';
 import MemberFollowings from '../../libs/components/member/MemberFollowings';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import withLayoutFull from '../../libs/components/layout/LayoutFull';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -67,6 +67,8 @@ const MyPage: NextPage = () => {
 	} else {
 		return (
 			<div id="my-page" style={{ position: 'relative' }}>
+				<Divider sx={{marginTop:'120px'}}></Divider>
+				
 				<div className="container">
 					<Stack className={'my-page'}>
 						<Stack className={'back-frame'}>
@@ -75,8 +77,8 @@ const MyPage: NextPage = () => {
 							</Stack>
 							<Stack className="main-config" mb={'76px'}>
 								<Stack className={'list-config'}>
-									{category === 'addProperty' && <AddProperty />}
-									{category === 'myProperties' && <MyProperties />}
+									{category === 'addProduct' && <AddProduct />}
+									{category === 'myProducts' && <MyProducts />}
 									{category === 'myFavorites' && <MyFavorites />}
 									{category === 'recentlyVisited' && <RecentlyVisited />}
 									{category === 'myArticles' && <MyArticles />}
@@ -106,4 +108,4 @@ const MyPage: NextPage = () => {
 	}
 };
 
-export default withLayoutBasic(MyPage);
+export default withLayoutFull(MyPage);

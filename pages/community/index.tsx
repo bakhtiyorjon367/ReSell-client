@@ -5,12 +5,15 @@ import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Stack, Tab, Typography, Button, Pagination } from '@mui/material';
 import CommunityCard from '../../libs/components/common/CommunityCard';
 import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
-import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import { BoardArticle } from '../../libs/types/board-article/board-article';
 import { T } from '../../libs/types/common';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { BoardArticlesInquiry } from '../../libs/types/board-article/board-article.input';
 import { BoardArticleCategory } from '../../libs/enums/board-article.enum';
+import withLayoutFull from '../../libs/components/layout/LayoutFull';
+import { useMutation, useQuery } from '@apollo/client';
+import { LIKE_TARGET_BOARD_ARTICLE } from '../../apollo/user/mutation';
+import { GET_BOARD_ARTICLES } from '../../apollo/user/query';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -29,6 +32,25 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 	if (articleCategory) initialInput.search.articleCategory = articleCategory;
 
 	/** APOLLO REQUESTS **/
+	const [likeTargetArticle] = useMutation(LIKE_TARGET_BOARD_ARTICLE);
+
+	const {
+		loading: boardArticlesLoading,
+		data: boardArticlesData,
+		error:boardArticlesError,
+		refetch:boardArticlesRefetch
+	}= useQuery
+		(GET_BOARD_ARTICLES, {
+			fetchPolicy:'cache-and-network',
+			variables: {
+				input: searchCommunity,
+			},
+			notifyOnNetworkStatusChange:true,
+			onCompleted:(data:T) => {
+				setBoardArticles(data?.getBoardArticles?.list);
+				setTotalCount(data?.getBoardArticles?.metaCounter[0].total);
+			},
+		});
 
 	/** LIFECYCLES **/
 	useEffect(() => {
@@ -70,54 +92,67 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 				<div className="container">
 					<TabContext value={searchCommunity.search.articleCategory}>
 						<Stack className="main-box">
-							<Stack className="left-config">
-								<Stack className={'image-info'}>
-									<img src={'/img/logo/logoText.svg'} />
-									<Stack className={'community-name'}>
-										<Typography className={'name'}>Nestar Community</Typography>
-									</Stack>
-								</Stack>
-
-								<TabList
-									orientation="vertical"
-									aria-label="lab API tabs example"
-									TabIndicatorProps={{
-										style: { display: 'none' },
-									}}
-									onChange={tabChangeHandler}
-								>
-									<Tab
-										value={'FREE'}
-										label={'Free Board'}
-										className={`tab-button ${searchCommunity.search.articleCategory == 'FREE' ? 'active' : ''}`}
-									/>
-									<Tab
-										value={'RECOMMEND'}
-										label={'Recommendation'}
-										className={`tab-button ${searchCommunity.search.articleCategory == 'RECOMMEND' ? 'active' : ''}`}
-									/>
-									<Tab
-										value={'NEWS'}
-										label={'News'}
-										className={`tab-button ${searchCommunity.search.articleCategory == 'NEWS' ? 'active' : ''}`}
-									/>
-									<Tab
-										value={'HUMOR'}
-										label={'Humor'}
-										className={`tab-button ${searchCommunity.search.articleCategory == 'HUMOR' ? 'active' : ''}`}
-									/>
-								</TabList>
-							</Stack>
 							<Stack className="right-config">
 								<Stack className="panel-config">
 									<Stack className="title-box">
 										<Stack className="left">
-											<Typography className="title">{searchCommunity.search.articleCategory} BOARD</Typography>
+											{/* <Typography className="title">{searchCommunity.search.articleCategory} BOARD</Typography>
 											<Typography className="sub-title">
 												Express your opinions freely here without content restrictions
-											</Typography>
+											</Typography> */}
+											<Stack className="left-config">
+												{/* <Stack className={'image-info'}>
+													<img src={'/img/logo/favicon.svg'} />
+													<Stack className={'community-name'}>
+														<Typography className={'name'}>Blogs</Typography>
+													</Stack>
+												</Stack> */}
+
+												<TabList
+													orientation="horizontal"
+													aria-label="lab API tabs example"
+													TabIndicatorProps={{
+														style: { display: 'none' },
+													}}
+													onChange={tabChangeHandler}
+												>
+													<Tab
+														value={'FREE'}
+														label={'Free Board'}
+														className={`tab-button ${searchCommunity.search.articleCategory == 'FREE' ? 'active' : ''}`}
+													/>
+													<Tab
+														value={'RECOMMEND'}
+														label={'Recommendation'}
+														className={`tab-button ${searchCommunity.search.articleCategory == 'RECOMMEND' ? 'active' : ''}`}
+													/>
+													<Tab
+														value={'HOBBY'}
+														label={'Hobby'}
+														className={`tab-button ${searchCommunity.search.articleCategory == 'HOBBY' ? 'active' : ''}`}
+													/>
+													<Tab
+														value={'QUESTION'}
+														label={'Question'}
+														className={`tab-button ${searchCommunity.search.articleCategory == 'QUESTION' ? 'active' : ''}`}
+													/>
+												</TabList>
+												<Button
+													onClick={() =>
+														router.push({
+															pathname: '/mypage',
+															query: {
+																category: 'writeArticle',
+															},
+														})
+													}
+													className="right"
+												>
+													Write
+												</Button>
+											</Stack>
 										</Stack>
-										<Button
+										{/* <Button
 											onClick={() =>
 												router.push({
 													pathname: '/mypage',
@@ -129,7 +164,7 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 											className="right"
 										>
 											Write
-										</Button>
+										</Button> */}
 									</Stack>
 
 									<TabPanel value="FREE">
@@ -174,7 +209,7 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 											)}
 										</Stack>
 									</TabPanel>
-									<TabPanel value="HUMOR">
+									<TabPanel value="HOBBY">
 										<Stack className="list-box">
 											{totalCount ? (
 												boardArticles?.map((boardArticle: BoardArticle) => {
@@ -229,4 +264,4 @@ Community.defaultProps = {
 	},
 };
 
-export default withLayoutBasic(Community);
+export default withLayoutFull(Community);

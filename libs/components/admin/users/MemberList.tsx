@@ -62,12 +62,7 @@ const headCells: readonly HeadCell[] = [
 		disablePadding: false,
 		label: 'NICK NAME',
 	},
-	{
-		id: 'fullname',
-		numeric: false,
-		disablePadding: false,
-		label: 'FULL NAME',
-	},
+	
 	{
 		id: 'phone',
 		numeric: true,
@@ -177,7 +172,6 @@ export const MemberPanelList = (props: MemberPanelListType) => {
 											</Stack>
 										</TableCell>
 
-										<TableCell align="center">{member.memberFullName ?? '-'}</TableCell>
 										<TableCell align="left">{member.memberPhone}</TableCell>
 
 										<TableCell align="center">

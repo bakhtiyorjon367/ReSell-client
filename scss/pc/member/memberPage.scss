@@ -1,33 +1,29 @@
 #pc-wrap {
 	#member-page {
-		background: #f6f6f6;
+		background: #303030;
+		min-height: 1600px;
 		.container {
 			.member-page {
 				position: relative;
 				width: 100%;
 				flex-direction: row;
 				gap: 25px;
-				padding-top: 96px;
+				padding-top: 100px;
 				.back-frame {
 					width: 1260px;
 					height: auto;
 					display: flex;
 					flex-direction: row;
-					margin: 100px 0 200px 0;
-					border-radius: 12px;
-					border: 1px solid #c4c4c4;
-					background: #fff;
-					box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
+					margin: 100px 0 0 200px ;
+					border-radius: 5px;
+					background: #c4c3c3;
 					.left-config {
 						position: relative;
 						padding: 0 0 0 0;
 						width: 266px;
 						height: 700px;
 						border-radius: 12px;
-						background: #fff;
-						border: 1px solid rgba(196, 196, 196, 0.79);
-						box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
-						margin: 180px 20px 40px 20px;
+						margin: 10px 20px 0px 0px;
 						.profile {
 							margin-top: 5px;
 							position: relative;
@@ -99,7 +95,7 @@
 						}
 						.sections {
 							height: auto;
-							margin-top: 30px;
+							margin-top: 50px;
 							.section {
 								height: auto;
 								.title {
@@ -108,6 +104,7 @@
 									font-style: normal;
 									font-weight: 400;
 									line-height: 28px;
+									color: #484747;
 								}
 								.sub-section {
 									width: 230px;
@@ -182,16 +179,14 @@
 					.main-config {
 						position: relative;
 						width: 936px;
-						margin-top: 52px;
+						margin-top: 50px;
 						align-items: center;
-						gap: 109px;
 						.list-config {
 							display: flex;
 							width: 100%;
 							height: auto;
 							flex-direction: row;
 							flex-wrap: wrap;
-							gap: 22px;
 						}
 					}
 				}

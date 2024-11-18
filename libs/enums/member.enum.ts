@@ -1,7 +1,6 @@
 export enum MemberType {
-	USER = 'USER',
-	AGENT = 'AGENT',
-	ADMIN = 'ADMIN',
+	USER= 'USER',
+    ADMIN = 'ADMIN',
 }
 
 export enum MemberStatus {

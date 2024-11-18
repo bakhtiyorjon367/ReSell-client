@@ -135,14 +135,13 @@ export const updateUserInfo = (jwtToken: any) => {
 		memberAuthType: claims.memberAuthType,
 		memberPhone: claims.memberPhone ?? '',
 		memberNick: claims.memberNick ?? '',
-		memberFullName: claims.memberFullName ?? '',
 		memberImage:
 			claims.memberImage === null || claims.memberImage === undefined
 				? '/img/profile/defaultUser.svg'
 				: `${claims.memberImage}`,
 		memberAddress: claims.memberAddress ?? '',
 		memberDesc: claims.memberDesc ?? '',
-		memberProperties: claims.memberProperties,
+		memberProduct: claims.memberProduct,
 		memberRank: claims.memberRank,
 		memberArticles: claims.memberArticles,
 		memberPoints: claims.memberPoints,
@@ -171,11 +170,10 @@ const deleteUserInfo = () => {
 		memberAuthType: '',
 		memberPhone: '',
 		memberNick: '',
-		memberFullName: '',
 		memberImage: '',
 		memberAddress: '',
 		memberDesc: '',
-		memberProperties: 0,
+		memberProduct: 0,
 		memberRank: 0,
 		memberArticles: 0,
 		memberPoints: 0,

@@ -19,10 +19,10 @@ export const light = {
 		secondary: {
 			main: '#1646C1',
 		},
-		text: {
-			primary: '#212121',
-			secondary: '#616161',
-			dark: common.black,
+		text: {		//fff text(Type)
+			primary: '#807d7d', //->212121
+			secondary: '#616161', //->616161
+			dark: common.white,
 		},
 	},
 	components: {
@@ -94,8 +94,8 @@ export const light = {
 		},
 		MuiCssBaseline: {
 			styleOverrides: {
-				html: { height: '100%' },
-				body: { background: '#fff', height: '100%', minHeight: '100%' },
+				html: { height: '100%' },//252525
+				body: { background: '#252525', height: '100%', minHeight: '100%' },
 				p: {
 					margin: '0',
 				},
@@ -110,7 +110,7 @@ export const light = {
 		},
 		MuiButton: {
 			styleOverrides: {
-				root: {
+				root: {//#fff
 					color: '#212121',
 					minWidth: 'auto',
 					lineHeight: '1.2',
@@ -186,6 +186,7 @@ export const light = {
 					width: '100%',
 					backgroundColor: '#fff',
 					input: {},
+					
 				},
 				notchedOutline: {
 					padding: '8px',

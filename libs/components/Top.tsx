@@ -19,7 +19,7 @@ import { Logout } from '@mui/icons-material';
 import { REACT_APP_API_URL } from '../config';
 
 const Top = () => {
-	const device = useDeviceDetect();
+    const device = useDeviceDetect();
 	const user = useReactiveVar(userVar);
 	const { t, i18n } = useTranslation('common');
 	const router = useRouter();
@@ -33,7 +33,8 @@ const Top = () => {
 	const [logoutAnchor, setLogoutAnchor] = React.useState<null | HTMLElement>(null);
 	const logoutOpen = Boolean(logoutAnchor);
 
-	/** LIFECYCLES **/
+
+    	/** LIFECYCLES **/
 	useEffect(() => {
 		if (localStorage.getItem('locale') === null) {
 			localStorage.setItem('locale', 'en');
@@ -45,7 +46,7 @@ const Top = () => {
 
 	useEffect(() => {
 		switch (router.pathname) {
-			case '/property/detail':
+			case '/product/detail':
 				setBgColor(true);
 				break;
 			default:
@@ -145,14 +146,14 @@ const Top = () => {
 				<Link href={'/'}>
 					<div>{t('Home')}</div>
 				</Link>
-				<Link href={'/property'}>
-					<div>{t('Properties')}</div>
+				<Link href={'/product'}>
+					<div>{t('Shop local')}</div>
 				</Link>
-				<Link href={'/agent'}>
-					<div> {t('Agents')} </div>
+				<Link href={'/about'}>
+					<div> {t('About us')} </div>
 				</Link>
 				<Link href={'/community?articleCategory=FREE'}>
-					<div> {t('Community')} </div>
+					<div> {t('Blog')} </div>
 				</Link>
 				<Link href={'/cs'}>
 					<div> {t('CS')} </div>
@@ -165,22 +166,21 @@ const Top = () => {
 				<Stack className={`navbar-main ${colorChange ? 'transparent' : ''} ${bgColor ? 'transparent' : ''}`}>
 					<Stack className={'container'}>
 						<Box component={'div'} className={'logo-box'}>
-							<Link href={'/'}>
-								<img src="/img/logo/logoWhite.svg" alt="" />
+							<Link href={'/'} className='link'>
+								<img src="/img/logo/favicon.svg" alt="" />
+								<span>ReSell</span>
 							</Link>
 						</Box>
 						<Box component={'div'} className={'router-box'}>
-							<Link href={'/'}>
-								<div>{t('Home')}</div>
-							</Link>
-							<Link href={'/property'}>
-								<div>{t('Properties')}</div>
-							</Link>
-							<Link href={'/agent'}>
-								<div> {t('Agents')} </div>
+							
+							<Link href={'/product'}>
+								<div>{t('Shop Local')}</div>
 							</Link>
 							<Link href={'/community?articleCategory=FREE'}>
-								<div> {t('Community')} </div>
+								<div> {t('Blog')} </div>
+							</Link>
+							<Link href={'/about'}>
+								<div> {t('About us')} </div>
 							</Link>
 							{user?._id && (
 								<Link href={'/mypage'}>
@@ -221,10 +221,12 @@ const Top = () => {
 							) : (
 								<Link href={'/account/join'}>
 									<div className={'join-box'}>
-										<AccountCircleOutlinedIcon />
-										<span>
-											{t('Login')} / {t('Register')}
-										</span>
+									<AccountCircleOutlinedIcon />
+											<span>
+												{t('Login')} / {t('Register')}
+											</span>
+										
+										
 									</div>
 								</Link>
 							)}
@@ -235,7 +237,7 @@ const Top = () => {
 									disableRipple
 									className="btn-lang"
 									onClick={langClick}
-									endIcon={<CaretDown size={14} color="#616161" weight="fill" />}
+									endIcon={<CaretDown size={18} color="#616161" weight="fill" />}
 								>
 									<Box component={'div'} className={'flag'}>
 										{lang !== null ? (
@@ -284,7 +286,6 @@ const Top = () => {
 				</Stack>
 			</Stack>
 		);
-	}
 };
-
-export default withRouter(Top);
+}
+export default Top;  // export default Top;

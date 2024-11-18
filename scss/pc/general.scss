@@ -1,4 +1,4 @@
-.property-big-card-box {
+.product-big-card-box {
 	position: relative;
 	margin-right: 8px;
 	margin-left: 8px;
@@ -157,13 +157,13 @@
 		}
 	}
 }
-.agent-general-card {
+.user-general-card {
 	position: relative;
 	margin-right: 27px;
 	margin-bottom: 34px;
 	display: flex;
 	flex-direction: column;
-	.agent-img {
+	.user-img {
 		border-radius: 12px;
 		width: 233px;
 		height: 273px;
@@ -185,13 +185,13 @@
 			line-height: normal;
 		}
 	}
-	.agent-desc {
+	.user-desc {
 		margin-top: 23px;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
-		.agent-info {
+		.user-info {
 			display: flex;
 			flex-direction: column;
 			strong {
@@ -231,86 +231,98 @@
 }
 .community-general-card-config {
 	position: relative;
+	flex-direction: row;
+	justify-content: space-between;
 	height: auto;
 	gap: 20px;
 	border-radius: 12px;
+	background: #e4e3e3;
 	cursor: pointer;
-	.image-box {
-		width: 100%;
-		height: 283px;
-		.card-img {
-			width: 100%;
-			height: 100%;
-			border-radius: 12px;
-		}
-	}
 	.desc-box {
 		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-		width: 100%;
-		height: 80px;
+		flex-direction: column;
+		width: 70%;
+		padding-left: 10px;
 		.title {
-			color: #717171;
+			color: #444444;
 			font-family: $font;
-			font-size: 13px;
+			font-size: 18px;
 			font-style: normal;
 			font-weight: 400;
 			line-height: normal;
+			text-decoration: underline;
+			padding: 1px;
+			cursor: pointer;
 		}
 		.desc {
-			color: #181a20;
-			font-family: $font;
-			font-size: 15px;
-			font-style: normal;
-			font-weight: 600;
-			line-height: 26px;
-			text-transform: capitalize;
-		}
-		.buttons {
-			width: auto;
-			display: flex;
-			flex-direction: row;
-			justify-content: center;
-			align-items: center;
-			svg {
-				width: 24px;
-				height: 24px;
-				cursor: pointer;
-			}
-			.view-cnt {
-				font-size: 13px;
-			}
-		}
-	}
-	.date-box {
-		position: absolute;
-		width: 70px;
-		height: 69.014px;
-		align-items: center;
-		justify-content: center;
-		top: 235px;
-		right: 20px;
-		border-radius: 12px;
-		background: #fff;
-		box-shadow: 0px 6px 15px 0px rgba(64, 79, 104, 0.05);
-		.month {
-			color: #181a20;
-			text-align: center;
-			font-family: $font;
-			font-size: 13px;
-			font-style: normal;
-			font-weight: 400;
-			line-height: normal;
-		}
-		.day {
 			color: #181a20;
 			font-family: $font;
 			font-size: 20px;
 			font-style: normal;
 			font-weight: 600;
-			line-height: normal;
+			line-height: 26px;
+			text-transform: capitalize;
+		}
+		.date-box {
+			position: relative;
+			width: 90px;
+			flex-direction: row;
+			justify-content: space-between;
+			.month {
+				color: #181a20;
+				text-align: center;
+				font-family: $font;
+				font-size: 13px;
+				font-style: normal;
+				font-weight: 400;
+				line-height: normal;
+			}
+			.day {
+				color: #181a20;
+				text-align: center;
+				font-family: $font;
+				font-size: 13px;
+				font-style: normal;
+				font-weight: 400;
+				line-height: normal;
+			}
+		}
+		.content{
+			margin-top: 20px;
+			width: 100%;
+			color: #010101;
+			font-family: $font;
+			font-size: 30px;
+			font-style: normal;
+			
+		}
+		
+	}
+	.image-box {
+		width: 300px;
+		height: 300px;
+		.card-img {
+			width: 100%;
+			height: 100%;
+			border-radius: 12px;
+			cursor: pointer;
+		}
+		.buttons {
+			position: absolute;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			top: 260px;
+			right: 30px;
+			svg {
+				width: 34px;
+				height: 24px;
+				cursor: pointer;
+			}
+			.view-cnt {
+				font-size: 23px;
+			}
 		}
 	}
 }

@@ -8,13 +8,13 @@ export default function Document() {
 				<link rel="icon" type="image/png" href="/img/logo/favicon.svg" />
 
 				{/* SEO */}
-				<meta name="keyword" content={'nestar, nestar.uz, devex mern, mern nestjs fullstack'} />
+				<meta name="keyword" content={'resell, resell.uz, ReSell , RESELL nestjs '} />
 				<meta
 					name={'description'}
 					content={
-						'Buy and sell properties anywhere anytime in South Korea. Best Properties at Best prices on nestar.uz | ' +
-						'Покупайте и продавайте недвижимость в любой точке Южной Кореи в любое время. Лучшая недвижимость по лучшим ценам на nestar.uz | ' +
-						'대한민국 언제 어디서나 부동산을 사고팔 수 있습니다. Nestar.uz에서 최적의 가격으로 최고의 부동산을 만나보세요'
+						'Buy and sell products anywhere anytime in neighbourhood. We are changing classifield for the better. Welcome to your new neighbourhood market. | ' +
+						'Покупайте и продавайте продукты где угодно и когда угодно в районе. Мы меняем classifield к лучшему. Добро пожаловать на ваш новый рынок района. | ' +
+						'동네에서 언제 어디서나 제품을 사고 팔 수 있습니다. 우리는 classifield를 더 나은 방향으로 바꾸고 있습니다. 새로운 동네 시장에 오신 것을 환영합니다.'
 					}
 				/>
 			</Head>

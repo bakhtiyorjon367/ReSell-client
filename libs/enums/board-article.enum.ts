@@ -1,8 +1,11 @@
 export enum BoardArticleCategory {
+	COMMON = 'COMMON',
+	QUESTION = 'QUESTION',
+	WORKOUT = 'WORKOUT',
 	FREE = 'FREE',
 	RECOMMEND = 'RECOMMEND',
-	NEWS = 'NEWS',
-	HUMOR = 'HUMOR',
+	HOBBY = 'HOBBY',
+	PARTTIME = 'PARTTIME',
 }
 
 export enum BoardArticleStatus {

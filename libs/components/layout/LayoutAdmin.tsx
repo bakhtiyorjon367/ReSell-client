@@ -62,7 +62,7 @@ const withAdminLayout = (Component: ComponentType) => {
 
 		return (
 			<main id="pc-wrap" className="admin">
-				<Box component={'div'} sx={{ display: 'flex' }}>
+				<Box component={'div'} sx={{ display: 'flex', backgroundColor:'white'}}>
 					<AppBar
 						position="fixed"
 						sx={{
@@ -142,7 +142,7 @@ const withAdminLayout = (Component: ComponentType) => {
 					>
 						<Toolbar sx={{ flexDirection: 'column', alignItems: 'flexStart' }}>
 							<Stack className={'logo-box'}>
-								<img src={'/img/logo/logoText.svg'} alt={'logo'} />
+								<img src={'/img/logo/favicon.svg'} alt={'logo'} />
 							</Stack>
 
 							<Stack

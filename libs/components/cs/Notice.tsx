@@ -18,7 +18,7 @@ const Notice = () => {
 		},
 		{
 			no: 2,
-			title: "It's absolutely free to upload and trade properties",
+			title: "It's absolutely free to sell used items",
 			date: '31.03.2024',
 		},
 	];
@@ -31,7 +31,6 @@ const Notice = () => {
 				<span className={'title'}>Notice</span>
 				<Stack className={'main'}>
 					<Box component={'div'} className={'top'}>
-						<span>number</span>
 						<span>title</span>
 						<span>date</span>
 					</Box>

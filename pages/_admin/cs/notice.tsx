@@ -23,7 +23,7 @@ const AdminNotice: NextPage = (props: any) => {
 
 	return (
 		// @ts-ignore
-		<Box component={'div'} className={'content'}>
+		<Box component={'div'} className={'content'}  style={{ minHeight:'1300px' }}>
 			<Box component={'div'} className={'title flex_space'}>
 				<Typography variant={'h2'}>Notice Management</Typography>
 				<Button

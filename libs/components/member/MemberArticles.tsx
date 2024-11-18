@@ -40,10 +40,9 @@ const MemberArticles: NextPage = ({ initialInput, ...props }: any) => {
 				</Stack>
 				<Stack className="articles-list-box">
 					{memberBoArticles?.length === 0 && (
-						<div className={'no-data'}>
-							<img src="/img/icons/icoAlert.svg" alt="" />
-							<p>No Articles found!</p>
-						</div>
+						<p className={'no-data'}>
+							No Articles found!
+						</p>
 					)}
 					{memberBoArticles?.map((boardArticle: BoardArticle) => {
 						return <CommunityCard boardArticle={boardArticle} key={boardArticle?._id} size={'small'} />;
@@ -61,7 +60,7 @@ const MemberArticles: NextPage = ({ initialInput, ...props }: any) => {
 							/>
 						</Stack>
 						<Stack className="total-result">
-							<Typography>{total} property available</Typography>
+							<Typography>{total} product available</Typography>
 						</Stack>
 					</Stack>
 				)}

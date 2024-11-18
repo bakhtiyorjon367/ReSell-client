@@ -9,7 +9,7 @@
 			height: auto;
 			flex-direction: row;
 			justify-content: space-between;
-			align-self: flex-start;
+			align-self: center;
 			.right-box {
 				width: 315px;
 				.main-title {
@@ -31,8 +31,9 @@
 			flex-wrap: wrap;
 			gap: 35px;
 			margin-top: 85px;
-			.no-data {
-				width: 100%;
+			.no-data{
+				margin-top: 110px;
+				color: rgb(6, 6, 6);
 			}
 		}
 		.pagination-config {

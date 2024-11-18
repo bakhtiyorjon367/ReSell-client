@@ -33,7 +33,6 @@ const MyArticles: NextPage = ({ initialInput, ...props }: T) => {
 				<Stack className="main-title-box">
 					<Stack className="right-box">
 						<Typography className="main-title">Article</Typography>
-						<Typography className="sub-title">We are glad to see you again!</Typography>
 					</Stack>
 				</Stack>
 				<Stack className="article-list-box">
@@ -42,10 +41,7 @@ const MyArticles: NextPage = ({ initialInput, ...props }: T) => {
 							return <CommunityCard boardArticle={boardArticle} key={boardArticle?._id} size={'small'} />;
 						})
 					) : (
-						<div className={'no-data'}>
-							<img src="/img/icons/icoAlert.svg" alt="" />
-							<p>No Articles found!</p>
-						</div>
+						<p className='no-data'>No Articles found!</p>	
 					)}
 				</Stack>
 

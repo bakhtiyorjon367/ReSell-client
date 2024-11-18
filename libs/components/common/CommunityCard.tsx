@@ -24,7 +24,7 @@ const CommunityCard = (props: CommunityCardProps) => {
 	const user = useReactiveVar(userVar);
 	const imagePath: string = boardArticle?.articleImage
 		? `${REACT_APP_API_URL}/${boardArticle?.articleImage}`
-		: '/img/community/communityImg.png';
+		: '/img/community/defaultImage.webp';
 
 	/** HANDLERS **/
 	const chooseArticleHandler = (e: React.SyntheticEvent, boardArticle: BoardArticle) => {
@@ -47,15 +47,8 @@ const CommunityCard = (props: CommunityCardProps) => {
 		return <div>COMMUNITY CARD MOBILE</div>;
 	} else {
 		return (
-			<Stack
-				sx={{ width: size === 'small' ? '285px' : '317px' }}
-				className="community-general-card-config"
-				onClick={(e) => chooseArticleHandler(e, boardArticle)}
-			>
-				<Stack className="image-box">
-					<img src={imagePath} alt="" className="card-img" />
-				</Stack>
-				<Stack className="desc-box" sx={{ marginTop: '-20px' }}>
+			<Stack className="community-general-card-config">
+				<Stack className="desc-box">
 					<Stack>
 						<Typography
 							className="desc"
@@ -66,8 +59,18 @@ const CommunityCard = (props: CommunityCardProps) => {
 						>
 							{boardArticle?.memberData?.memberNick}
 						</Typography>
-						<Typography className="title">{boardArticle?.articleTitle}</Typography>
+						<Stack className="date-box">
+							<Moment className="month" format={'MMMM'}>
+								{boardArticle?.createdAt}
+							</Moment>
+							<Moment className="day" format={'DD'}>{boardArticle?.createdAt}</Moment>
+						</Stack>
+						<Typography className="title" onClick={(e) => chooseArticleHandler(e, boardArticle)}>{boardArticle?.articleTitle}</Typography>
 					</Stack>
+					<Stack className='content'>{boardArticle?.articleContent}</Stack>
+				</Stack>
+				<Stack className="image-box">
+					<img src={imagePath} alt="" className="card-img" onClick={(e) => chooseArticleHandler(e, boardArticle)}/>
 					<Stack className={'buttons'}>
 						<IconButton color={'default'}>
 							<RemoveRedEyeIcon />
@@ -82,14 +85,6 @@ const CommunityCard = (props: CommunityCardProps) => {
 						</IconButton>
 						<Typography className="view-cnt">{boardArticle?.articleLikes}</Typography>
 					</Stack>
-				</Stack>
-				<Stack className="date-box">
-					<Moment className="month" format={'MMMM'}>
-						{boardArticle?.createdAt}
-					</Moment>
-					<Typography className="day">
-						<Moment format={'DD'}>{boardArticle?.createdAt}</Moment>
-					</Typography>
 				</Stack>
 			</Stack>
 		);

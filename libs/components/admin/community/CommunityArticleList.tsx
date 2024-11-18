@@ -135,7 +135,7 @@ const CommunityArticleList = (props: CommunityArticleListProps) => {
 	return (
 		<Stack>
 			<TableContainer>
-				<Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" size={'medium'}>
+				<Table sx={{ minWidth: 750, minHeight:1300  }} aria-labelledby="tableTitle" size={'medium'}>
 					{/*@ts-ignore*/}
 					<EnhancedTableHead />
 					<TableBody>

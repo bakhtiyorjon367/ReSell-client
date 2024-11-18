@@ -91,7 +91,7 @@ const TuiEditor = () => {
 					<Typography style={{ color: '#7f838d', margin: '10px' }} variant="h3">
 						Category
 					</Typography>
-					<FormControl sx={{ width: '100%', background: 'white' }}>
+					<FormControl sx={{ width: '100%', background: 'white', borderRadius:'5px'  }}>
 						<Select
 							value={articleCategory}
 							onChange={changeCategoryHandler}
@@ -101,9 +101,13 @@ const TuiEditor = () => {
 							<MenuItem value={BoardArticleCategory.FREE}>
 								<span>Free</span>
 							</MenuItem>
-							<MenuItem value={BoardArticleCategory.HUMOR}>Humor</MenuItem>
-							<MenuItem value={BoardArticleCategory.NEWS}>News</MenuItem>
+							<MenuItem value={BoardArticleCategory.COMMON}>Common</MenuItem>
+							<MenuItem value={BoardArticleCategory.FREE}>Free</MenuItem>
 							<MenuItem value={BoardArticleCategory.RECOMMEND}>Recommendation</MenuItem>
+							<MenuItem value={BoardArticleCategory.HOBBY}>Hobby</MenuItem>
+							<MenuItem value={BoardArticleCategory.QUESTION}>Question?</MenuItem>
+							<MenuItem value={BoardArticleCategory.WORKOUT}>Workout</MenuItem>
+							<MenuItem value={BoardArticleCategory.PARTTIME}>Part-time</MenuItem>
 						</Select>
 					</FormControl>
 				</Box>
@@ -114,8 +118,7 @@ const TuiEditor = () => {
 					<TextField
 						onChange={articleTitleHandler}
 						id="filled-basic"
-						label="Type Title"
-						style={{ width: '300px', background: 'white' }}
+						style={{ width: '300px', background: 'white', borderRadius:'5px'}}
 					/>
 				</Box>
 			</Stack>
@@ -148,7 +151,7 @@ const TuiEditor = () => {
 			<Stack direction="row" justifyContent="center">
 				<Button
 					variant="contained"
-					color="primary"
+					color="inherit"
 					style={{ margin: '30px', width: '250px', height: '45px' }}
 					onClick={handleRegisterButton}
 				>

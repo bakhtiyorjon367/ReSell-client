@@ -1,6 +1,5 @@
 #pc-wrap {
 	#my-page {
-		background: #f6f6f6;
 		.container {
 			.my-page {
 				position: relative;
@@ -8,15 +7,16 @@
 				flex-direction: row;
 				gap: 25px;
 				padding-top: 96px;
+				margin-left: 200px;
 				.back-frame {
 					width: 1260px;
 					height: auto;
 					display: flex;
 					flex-direction: row;
-					margin: 100px 0 200px 0;
+					margin: 0px 0 200px 0;
 					border-radius: 12px;
 					border: 1px solid #c4c4c4;
-					background: #fff;
+					background: #c4c3c3;
 					box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
 					.left-config {
 						position: relative;
@@ -24,10 +24,7 @@
 						width: 266px;
 						height: 700px;
 						border-radius: 12px;
-						background: #fff;
-						border: 1px solid rgba(196, 196, 196, 0.79);
-						box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
-						margin: 180px 20px 40px 20px;
+						margin: 155px 20px 40px 20px;
 						.profile {
 							margin-top: 5px;
 							position: relative;
@@ -41,6 +38,7 @@
 									right: 30px;
 									bottom: 12px;
 									object-fit: cover;
+									border: 0.2px solid rgb(180, 179, 179);
 								}
 							}
 							.user-info {

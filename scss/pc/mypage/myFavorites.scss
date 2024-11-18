@@ -39,6 +39,9 @@
 				flex-wrap: wrap;
 				flex-direction: row;
 				gap: 22px;
+				.no-data{
+					color: black;
+				}
 				.card-config {
 					width: 296px;
 					height: 413px;

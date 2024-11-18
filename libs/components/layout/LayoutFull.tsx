@@ -18,7 +18,6 @@ const withLayoutFull = (Component: any) => {
 		const router = useRouter();
 		const device = useDeviceDetect();
 		const user = useReactiveVar(userVar);
-
 		/** LIFECYCLES **/
 		useEffect(() => {
 			const jwt = getJwtToken();
@@ -31,8 +30,8 @@ const withLayoutFull = (Component: any) => {
 			return (
 				<>
 					<Head>
-						<title>Nestar</title>
-						<meta name={'title'} content={`Nestar`} />
+						<title>ReSell</title>
+						<meta name={'title'} content={`ReSell`} />
 					</Head>
 					<Stack id="mobile-wrap">
 						<Stack id={'top'}>
@@ -53,11 +52,11 @@ const withLayoutFull = (Component: any) => {
 			return (
 				<>
 					<Head>
-						<title>Nestar</title>
-						<meta name={'title'} content={`Nestar`} />
+						<title>ReSell</title>
+						<meta name={'title'} content={`ReSell`} />
 					</Head>
 					<Stack id="pc-wrap">
-						<Stack id={'top'}>
+						<Stack id={'top'} >
 							<Top />
 						</Stack>
 
@@ -65,7 +64,7 @@ const withLayoutFull = (Component: any) => {
 							<Component {...props} />
 						</Stack>
 
-						{user?._id && <Chat />}
+						{user?._id && router.pathname === '/community' && <Chat />}
 
 						<Stack id={'footer'}>
 							<Footer />

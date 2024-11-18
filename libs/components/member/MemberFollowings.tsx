@@ -61,10 +61,9 @@ const MemberFollowings = (props: MemberFollowingsProps) => {
 						<Typography className="title-text">Subscription</Typography>
 					</Stack>
 					{memberFollowings?.length === 0 && (
-						<div className={'no-data'}>
-							<img src="/img/icons/icoAlert.svg" alt="" />
-							<p>No Followings yet!</p>
-						</div>
+						<p className={'no-data'}>
+							No Following found!
+						</p>
 					)}
 					{memberFollowings.map((follower: Following) => {
 						const imagePath: string = follower?.followingData?.memberImage

@@ -1,18 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import {
-	TableCell,
-	TableHead,
-	TableBody,
-	TableRow,
-	Table,
-	TableContainer,
-	Button,
-	Menu,
-	Fade,
-	MenuItem,
-} from '@mui/material';
+import {TableCell,TableHead,TableBody,TableRow,Table,TableContainer,Button,Menu,Fade,MenuItem} from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { Stack } from '@mui/material';
@@ -127,7 +116,7 @@ export const InquiryList = (props: InquiryPanelListType) => {
 	return (
 		<Stack>
 			<TableContainer>
-				<Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" size={dense ? 'small' : 'medium'}>
+				<Table sx={{ minWidth: 750, minHeight:1300  }} aria-labelledby="tableTitle" size={dense ? 'small' : 'medium'}>
 					{/*@ts-ignore*/}
 					<EnhancedTableHead />
 					<TableBody>

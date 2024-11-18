@@ -1,0 +1,258 @@
+#pc-wrap{
+    #product-list-page {
+        padding-bottom: 40px;
+        .container {
+            min-height: 1100px;
+            .right {
+                position:absolute;
+                right: 0px;
+                top: 4%;
+                margin: -20px 20px 10px 10px ;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                z-index: 2;
+                button {
+                    margin-left: 10px;
+                    color: #b9babf;
+                    font-family: $font;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: bold;
+                    line-height: 26px;
+                    &:hover {
+                        background: none;
+                    }
+                }
+                span{
+                    color: #b9babf;
+                }
+            }
+            .product-page {
+                position: relative;
+                top:10px;
+                width: 100%;
+                flex-direction: row;
+                gap:25px;
+                padding-top: 96px;
+                .filter-config {
+                    width: 339px;
+                    height: auto;
+                    .filter-main{
+                        width: 100%;
+                        padding: 30px 24px;
+                        border-radius: 12px;
+                        .divider{
+                            border: 1px rgb(126, 124, 124) solid;
+                            margin-bottom: 15px;
+                        }
+                        .find-your-item {
+                            position: relative;
+                            width: 100%;
+                            gap:10;
+                            .product-location{
+                                gap:10;
+                                max-height: 300px;
+                                overflow-y: scroll;
+                                transition: 1s;
+                                &:hover {
+                                    height: 153px;
+                                }
+                            }
+                            .title {
+                                width: auto;
+                                height: auto;
+                                color: #dddcdc;
+                                font-family: $font;
+                                font-size: 20px;
+                                letter-spacing: 0.5px;
+                                font-style: bold;
+                                margin-bottom: 10px;
+                                font-weight: 600;
+                                line-height: normal;
+                            }
+                            .input-box {
+                                position: relative;
+                                width: 110%;
+                                flex-direction: row;
+                                align-items: center;
+                                svg {
+                                    cursor: pointer;
+                                    color: #c3c3c3;
+                                }
+                                .product-checkbox {
+                                    width: 25px;
+                                    height: 20px;
+                                    margin-right: 10px;
+                                    svg {
+                                        width: 25px;
+                                    }
+                                }
+                            }
+                            .product-type {
+                                color: #d2d2d2;
+                                font-family: $font;
+                                font-size: 14px;
+                                font-style: normal;
+                                font-weight: 400;
+                                line-height: 19px;
+                                overflow: scroll;
+                            }
+                            .price-input {
+                                width: 100%;
+                                gap: 10px;
+                                flex-direction: row;
+                                align-items: center;
+                                padding: 10px 0;
+                                border-color: #eb6753;
+                                .central-divider {
+                                    width: 22px;
+                                    border: 1px solid rgb(65, 64, 64);
+                                }
+                                input {
+                                    width: 100%;
+                                    height: 40px;
+                                    border-radius: 8px;
+                                    padding-left: 15px;
+                                    background: #7f8082;
+                                    font-size: 17px;
+                                    color:rgb(233, 231, 231)
+                                }
+                            }
+                        }
+                    }
+                }
+                .main-config {
+                    width: 1236px;
+                    align-items: center;
+                    gap: 100;
+                    .list-config {
+                        display: flex;
+                        width: 100%;
+                        height: auto;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        gap:23px;
+                        .card-config {
+                            width: 286px;
+                            height: 463px;
+                            .top {
+                                position: relative;
+                                width: 100%;
+                                height: 300px;
+                                img{
+                                }
+                                a {
+                                    height: 100%;
+                                }
+                                img{
+                                    width: 100%;
+                                    height: 100%;
+                                    object-fit: cover;
+                                    border-radius: 10px 10px;
+                                }
+                            }
+                            .bottom {
+                                width: 100%;
+                                height: 100px;
+                                padding: 15px 16px 0px 6px;
+                                background-color: none;
+                                .name-address {
+                                    width: 100%;
+                                    height: 70px;
+                                    margin-bottom: 20px;
+                                    .name {
+                                        width: 100%;
+                                        height: 60px;
+                                        overflow: hidden;
+                                        p {
+                                            color: #c8c9ca;
+                                            font-family: $font;
+                                            font-size: 18px;
+                                            font-style: normal;
+                                            font-weight: 600;
+                                            line-height: normal;
+                                            text-transform: capitalize;
+                                            text-decoration: underline;
+                                        }
+                                    }
+                                    .address {
+                                        width: 100%;
+                                        overflow: hidden;
+                                        height: 50px;
+                                        
+                                        p {
+                                            color: #c7bfbf;
+                                            font-family: $font;
+                                            font-size: 17px;
+                                            font-style: normal;
+                                            font-weight: 400;
+                                            line-height: normal;
+                                        }
+                                    }
+                                }
+                                .type-buttons {
+                                    flex-direction: row;
+                                    width: 100%;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                    height: 30px;
+                                    .type {
+                                        flex-direction: row;
+                                        align-items: center;
+                                        gap: 7px;
+                                        .share{
+                                            color: green;
+                                            
+                                        }
+                                        .price{
+                                            color: rgb(214, 211, 211);
+                                            font-size: 20px;
+                                        }
+                                        
+                                    }
+                                    .buttons {
+                                        flex-direction: row;
+                                        width: auto;
+                                        justify-content: center;
+                                        align-items: center;
+                                        svg {
+                                            width: 24px;
+                                            height: 24px;
+                                            cursor: pointer;
+                                        }
+                                        .view-cnt {
+                                            font-size: 13px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .pagination-config {
+                        width: 442px;
+                        height: 86px;
+                        align-items: center;
+                        gap: 20px;
+                        .pagination-box {
+                            width: 100%;
+                            align-items: center;
+                        }
+                        .total-result {
+                            p {
+                                color: #7f8082;
+                                text-align: center;
+                                font-family: $font;
+                                font-size: 24px;
+                                font-style: normal;
+                                font-weight: 275;
+                                line-height: 26px;
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

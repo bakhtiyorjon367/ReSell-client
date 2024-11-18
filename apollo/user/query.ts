@@ -4,9 +4,9 @@ import { gql } from '@apollo/client';
  *         MEMBER         *
  *************************/
 
-export const GET_AGENTS = gql`
-	query GetAgents($input: AgentsInquiry!) {
-		getAgents(input: $input) {
+export const GET_ALL_MEMBERS = gql`
+	query GetAllMembers($input: GetMembers!) {
+		getAllMembers(input: $input) {
 			list {
 				_id
 				memberType
@@ -14,17 +14,20 @@ export const GET_AGENTS = gql`
 				memberAuthType
 				memberPhone
 				memberNick
-				memberFullName
 				memberImage
 				memberAddress
-				memberDesc
-				memberWarnings
-				memberBlocks
-				memberProperties
-				memberRank
+				memberProduct
+				memberPurchase
+				memberArticles
+				memberFollowers
+				memberFollowings
 				memberPoints
 				memberLikes
 				memberViews
+				memberComments
+				memberRank
+				memberWarnings
+				memberBlocks
 				deletedAt
 				createdAt
 				updatedAt
@@ -40,73 +43,72 @@ export const GET_AGENTS = gql`
 			}
 		}
 	}
-`;
 
-export const GET_MEMBER = gql(`
-query GetMember($input: String!) {
-    getMember(memberId: $input) {
-        _id
-        memberType
-        memberStatus
-        memberAuthType
-        memberPhone
-        memberNick
-        memberFullName
-        memberImage
-        memberAddress
-        memberDesc
-        memberProperties
-        memberArticles
-        memberPoints
-        memberLikes
-        memberViews
-        memberFollowings
-				memberFollowers
-        memberRank
-        memberWarnings
-        memberBlocks
-        deletedAt
-        createdAt
-        updatedAt
-        accessToken
-        meFollowed {
-					followingId
-					followerId
-					myFollowing
-				}
-    }
-}
+	`;
+
+	export const GET_MEMBER = gql(`
+	query GetMember($input: String!) {
+		getMember(memberId: $input) {
+			_id
+			memberType
+			memberStatus
+			memberAuthType
+			memberPhone
+			memberNick
+			memberImage
+			memberAddress
+			memberProduct
+			memberPurchase
+			memberArticles
+			memberFollowers
+			memberFollowings
+			memberPoints
+			memberLikes
+			memberViews
+			memberComments
+			memberRank
+			memberWarnings
+			memberBlocks
+			deletedAt
+			createdAt
+			updatedAt
+			accessToken
+			meFollowed {
+				followingId
+				followerId
+				myFollowing
+			}
+		}
+	}
 `);
 
 /**************************
- *        PROPERTY        *
+ *        PRODUCTd       *
  *************************/
 
-export const GET_PROPERTY = gql`
-	query GetProperty($input: String!) {
-		getProperty(propertyId: $input) {
+export const GET_PRODUCT = gql`
+	query GetProduct($input: String!) {
+		getProduct(productId: $input) {
 			_id
-			propertyType
-			propertyStatus
-			propertyLocation
-			propertyAddress
-			propertyTitle
-			propertyPrice
-			propertySquare
-			propertyBeds
-			propertyRooms
-			propertyViews
-			propertyLikes
-			propertyImages
-			propertyDesc
-			propertyBarter
-			propertyRent
+			productCategory
+			productStatus
+			productLocation
+			dealAddress
+			productTitle
+			productPrice
+			productViews
+			productLikes
+			productImages
+			productDesc
+			productBarter
+			productSharing
 			memberId
 			soldAt
 			deletedAt
-			constructedAt
+			manufacturedAt
 			createdAt
 			updatedAt
+			reservedAt
 			memberData {
 				_id
 				memberType
@@ -114,54 +116,55 @@ export const GET_PROPERTY = gql`
 				memberAuthType
 				memberPhone
 				memberNick
-				memberFullName
 				memberImage
 				memberAddress
-				memberDesc
-				memberWarnings
-				memberBlocks
+				memberProduct
+				memberPurchase
+				memberArticles
+				memberFollowers
+				memberFollowings
 				memberPoints
 				memberLikes
 				memberViews
+				memberComments
+				memberRank
+				memberWarnings
+				memberBlocks
 				deletedAt
 				createdAt
 				updatedAt
 				accessToken
-			}
-			meLiked {
-				memberId
-				likeRefId
-				myFavorite
+				meLiked {
+					memberId
+					likeRefId
+					myFavorite
+				}
 			}
 		}
 	}
 `;
 
-export const GET_PROPERTIES = gql`
-	query GetProperties($input: PropertiesInquiry!) {
-		getProperties(input: $input) {
+export const GET_PRODUCTS = gql`
+	query GetProducts($input: ProductsInquiry!) {
+		getProducts(input: $input) {
 			list {
 				_id
-				propertyType
-				propertyStatus
-				propertyLocation
-				propertyAddress
-				propertyTitle
-				propertyPrice
-				propertySquare
-				propertyBeds
-				propertyRooms
-				propertyViews
-				propertyLikes
-				propertyRank
-				propertyImages
-				propertyDesc
-				propertyBarter
-				propertyRent
+				productCategory
+				productStatus
+				productLocation
+				dealAddress
+				productTitle
+				productPrice
+				productViews
+				productLikes
+				productImages
+				productDesc
+				productBarter
+				productSharing
 				memberId
 				soldAt
 				deletedAt
-				constructedAt
+				manufacturedAt
 				createdAt
 				updatedAt
 				memberData {
@@ -171,20 +174,24 @@ export const GET_PROPERTIES = gql`
 					memberAuthType
 					memberPhone
 					memberNick
-					memberFullName
 					memberImage
 					memberAddress
-					memberDesc
-					memberWarnings
-					memberBlocks
-					memberProperties
-					memberRank
+					memberProduct
+					memberPurchase
+					memberArticles
+					memberFollowers
+					memberFollowings
 					memberPoints
 					memberLikes
 					memberViews
+					memberComments
+					memberRank
+					memberWarnings
+					memberBlocks
 					deletedAt
 					createdAt
 					updatedAt
+					accessToken
 				}
 				meLiked {
 					memberId
@@ -197,34 +204,33 @@ export const GET_PROPERTIES = gql`
 			}
 		}
 	}
+
 `;
 
-export const GET_AGENT_PROPERTIES = gql`
-	query GetAgentProperties($input: AgentPropertiesInquiry!) {
-		getAgentProperties(input: $input) {
+export const GET_USER_PRODUCTS = gql`
+	query GetUserProducts($input: UserProductsInquiry!) {
+		getUserProducts(input: $input) {
 			list {
 				_id
-				propertyType
-				propertyStatus
-				propertyLocation
-				propertyAddress
-				propertyTitle
-				propertyPrice
-				propertySquare
-				propertyBeds
-				propertyRooms
-				propertyViews
-				propertyLikes
-				propertyImages
-				propertyDesc
-				propertyBarter
-				propertyRent
+				productCategory
+				productStatus
+				productLocation
+				dealAddress
+				productTitle
+				productPrice
+				productViews
+				productLikes
+				productImages
+				productDesc
+				productBarter
+				productSharing
 				memberId
 				soldAt
 				deletedAt
-				constructedAt
+				manufacturedAt
 				createdAt
 				updatedAt
+				reservedAt
 			}
 			metaCounter {
 				total
@@ -234,31 +240,26 @@ export const GET_AGENT_PROPERTIES = gql`
 `;
 
 export const GET_FAVORITES = gql`
-	query GetFavorites($input: OrdinaryInquiry!) {
+	query GetFavorites ($input: OrdinaryInquiry!){
 		getFavorites(input: $input) {
 			list {
 				_id
-				propertyType
-				propertyStatus
-				propertyLocation
-				propertyAddress
-				propertyTitle
-				propertyPrice
-				propertySquare
-				propertyBeds
-				propertyRooms
-				propertyViews
-				propertyLikes
-				propertyComments
-				propertyRank
-				propertyImages
-				propertyDesc
-				propertyBarter
-				propertyRent
+				productCategory
+				productStatus
+				productLocation
+				dealAddress
+				productTitle
+				productPrice
+				productViews
+				productLikes
+				productImages
+				productDesc
+				productBarter
+				productSharing
 				memberId
 				soldAt
 				deletedAt
-				constructedAt
+				manufacturedAt
 				createdAt
 				updatedAt
 				memberData {
@@ -268,18 +269,17 @@ export const GET_FAVORITES = gql`
 					memberAuthType
 					memberPhone
 					memberNick
-					memberFullName
 					memberImage
 					memberAddress
-					memberDesc
-					memberProperties
+					memberProduct
+					memberPurchase
 					memberArticles
+					memberFollowers
+					memberFollowings
 					memberPoints
 					memberLikes
 					memberViews
 					memberComments
-					memberFollowings
-					memberFollowers
 					memberRank
 					memberWarnings
 					memberBlocks
@@ -301,27 +301,22 @@ export const GET_VISITED = gql`
 		getVisited(input: $input) {
 			list {
 				_id
-				propertyType
-				propertyStatus
-				propertyLocation
-				propertyAddress
-				propertyTitle
-				propertyPrice
-				propertySquare
-				propertyBeds
-				propertyRooms
-				propertyViews
-				propertyLikes
-				propertyComments
-				propertyRank
-				propertyImages
-				propertyDesc
-				propertyBarter
-				propertyRent
+				productCategory
+				productStatus
+				productLocation
+				dealAddress
+				productTitle
+				productPrice
+				productViews
+				productLikes
+				productImages
+				productDesc
+				productBarter
+				productSharing
 				memberId
 				soldAt
 				deletedAt
-				constructedAt
+				manufacturedAt
 				createdAt
 				updatedAt
 				memberData {
@@ -331,18 +326,17 @@ export const GET_VISITED = gql`
 					memberAuthType
 					memberPhone
 					memberNick
-					memberFullName
 					memberImage
 					memberAddress
-					memberDesc
-					memberProperties
+					memberProduct
+					memberPurchase
 					memberArticles
+					memberFollowers
+					memberFollowings
 					memberPoints
 					memberLikes
 					memberViews
 					memberComments
-					memberFollowings
-					memberFollowers
 					memberRank
 					memberWarnings
 					memberBlocks
@@ -364,7 +358,7 @@ export const GET_VISITED = gql`
  *************************/
 
 export const GET_BOARD_ARTICLE = gql`
-	query GetBoardArticle($input: String!) {
+	query GetBoardArticle($input:String!) {
 		getBoardArticle(articleId: $input) {
 			_id
 			articleCategory
@@ -385,20 +379,24 @@ export const GET_BOARD_ARTICLE = gql`
 				memberAuthType
 				memberPhone
 				memberNick
-				memberFullName
 				memberImage
 				memberAddress
-				memberDesc
-				memberWarnings
-				memberBlocks
-				memberProperties
-				memberRank
+				memberProduct
+				memberPurchase
+				memberArticles
+				memberFollowers
+				memberFollowings
 				memberPoints
 				memberLikes
 				memberViews
+				memberComments
+				memberRank
+				memberWarnings
+				memberBlocks
 				deletedAt
 				createdAt
 				updatedAt
+				accessToken
 			}
 			meLiked {
 				memberId
@@ -437,20 +435,24 @@ export const GET_BOARD_ARTICLES = gql`
 					memberAuthType
 					memberPhone
 					memberNick
-					memberFullName
 					memberImage
 					memberAddress
-					memberDesc
-					memberWarnings
-					memberBlocks
-					memberProperties
-					memberRank
+					memberProduct
+					memberPurchase
+					memberArticles
+					memberFollowers
+					memberFollowings
 					memberPoints
 					memberLikes
 					memberViews
+					memberComments
+					memberRank
+					memberWarnings
+					memberBlocks
 					deletedAt
 					createdAt
 					updatedAt
+					accessToken
 				}
 			}
 			metaCounter {
@@ -483,17 +485,20 @@ export const GET_COMMENTS = gql`
 					memberAuthType
 					memberPhone
 					memberNick
-					memberFullName
 					memberImage
 					memberAddress
-					memberDesc
-					memberWarnings
-					memberBlocks
-					memberProperties
-					memberRank
+					memberProduct
+					memberPurchase
+					memberArticles
+					memberFollowers
+					memberFollowings
 					memberPoints
 					memberLikes
 					memberViews
+					memberComments
+					memberRank
+					memberWarnings
+					memberBlocks
 					deletedAt
 					createdAt
 					updatedAt
@@ -536,24 +541,24 @@ export const GET_MEMBER_FOLLOWERS = gql`
 					memberAuthType
 					memberPhone
 					memberNick
-					memberFullName
 					memberImage
 					memberAddress
-					memberDesc
-					memberProperties
+					memberProduct
+					memberPurchase
 					memberArticles
+					memberFollowers
+					memberFollowings
 					memberPoints
 					memberLikes
 					memberViews
 					memberComments
-					memberFollowings
-					memberFollowers
 					memberRank
 					memberWarnings
 					memberBlocks
 					deletedAt
 					createdAt
 					updatedAt
+					accessToken
 				}
 			}
 			metaCounter {
@@ -572,33 +577,6 @@ export const GET_MEMBER_FOLLOWINGS = gql`
 				followerId
 				createdAt
 				updatedAt
-				followingData {
-					_id
-					memberType
-					memberStatus
-					memberAuthType
-					memberPhone
-					memberNick
-					memberFullName
-					memberImage
-					memberAddress
-					memberDesc
-					memberProperties
-					memberArticles
-					memberPoints
-					memberLikes
-					memberViews
-					memberComments
-					memberFollowings
-					memberFollowers
-					memberRank
-					memberWarnings
-					memberBlocks
-					deletedAt
-					createdAt
-					updatedAt
-					accessToken
-				}
 				meLiked {
 					memberId
 					likeRefId
@@ -608,6 +586,32 @@ export const GET_MEMBER_FOLLOWINGS = gql`
 					followingId
 					followerId
 					myFollowing
+				}
+				followingData {
+					_id
+					memberType
+					memberStatus
+					memberAuthType
+					memberPhone
+					memberNick
+					memberImage
+					memberAddress
+					memberProduct
+					memberPurchase
+					memberArticles
+					memberFollowers
+					memberFollowings
+					memberPoints
+					memberLikes
+					memberViews
+					memberComments
+					memberRank
+					memberWarnings
+					memberBlocks
+					deletedAt
+					createdAt
+					updatedAt
+					accessToken
 				}
 			}
 			metaCounter {

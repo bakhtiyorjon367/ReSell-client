@@ -5,98 +5,103 @@ import { gql } from '@apollo/client';
  *************************/
 
 export const GET_ALL_MEMBERS_BY_ADMIN = gql`
-	query GetAllMembersByAdmin($input: MembersInquiry!) {
-		getAllMembersByAdmin(input: $input) {
-			list {
-				_id
-				memberType
-				memberStatus
-				memberAuthType
-				memberPhone
-				memberNick
-				memberFullName
-				memberImage
-				memberAddress
-				memberDesc
-				memberWarnings
-				memberBlocks
-				memberProperties
-				memberRank
-				memberArticles
-				memberPoints
-				memberLikes
-				memberViews
-				deletedAt
-				createdAt
-				updatedAt
-				accessToken
-			}
-			metaCounter {
-				total
-			}
-		}
-	}
+	
+query GetAllMembersByAdmin ($input: MembersInquiry!){
+    getAllMembersByAdmin(input: $input) {
+        list {
+            _id
+            memberType
+            memberStatus
+            memberAuthType
+            memberPhone
+            memberNick
+            memberImage
+            memberAddress
+            memberProduct
+            memberPurchase
+            memberArticles
+            memberFollowers
+            memberFollowings
+            memberPoints
+            memberLikes
+            memberViews
+            memberComments
+            memberRank
+            memberWarnings
+            memberBlocks
+            deletedAt
+            createdAt
+            updatedAt
+            accessToken
+        }
+        metaCounter {
+            total
+        }
+    }
+}
+
 `;
 
 /**************************
- *        PROPERTY        *
+ *        PRODUCTS        *
  *************************/
 
-export const GET_ALL_PROPERTIES_BY_ADMIN = gql`
-	query GetAllPropertiesByAdmin($input: AllPropertiesInquiry!) {
-		getAllPropertiesByAdmin(input: $input) {
-			list {
-				_id
-				propertyType
-				propertyStatus
-				propertyLocation
-				propertyAddress
-				propertyTitle
-				propertyPrice
-				propertySquare
-				propertyBeds
-				propertyRooms
-				propertyViews
-				propertyLikes
-				propertyImages
-				propertyDesc
-				propertyBarter
-				propertyRent
-				memberId
-				soldAt
-				deletedAt
-				constructedAt
-				createdAt
-				updatedAt
-				memberData {
-					_id
-					memberType
-					memberStatus
-					memberAuthType
-					memberPhone
-					memberNick
-					memberFullName
-					memberImage
-					memberAddress
-					memberDesc
-					memberWarnings
-					memberBlocks
-					memberProperties
-					memberRank
-					memberPoints
-					memberLikes
-					memberViews
-					deletedAt
-					createdAt
-					updatedAt
-					accessToken
-				}
-			}
-			metaCounter {
-				total
-			}
-		}
-	}
+export const GET_ALL_PRODUCTS_BY_ADMIN = gql`
+query GetAllProductsByAdmin($input: AllProductsInquiry!) {
+    getAllProductsByAdmin(input: $input) {
+        list {
+            _id
+            productCategory
+            productStatus
+            productLocation
+            dealAddress
+            productTitle
+            productPrice
+            productViews
+            productLikes
+            productImages
+            productDesc
+            productBarter
+            productSharing
+            memberId
+            soldAt
+            deletedAt
+            manufacturedAt
+            createdAt
+            updatedAt
+            memberData {
+                _id
+                memberType
+                memberStatus
+                memberAuthType
+                memberPhone
+                memberNick
+                memberImage
+                memberAddress
+                memberProduct
+                memberPurchase
+                memberArticles
+                memberFollowers
+                memberFollowings
+                memberPoints
+                memberLikes
+                memberViews
+                memberComments
+                memberRank
+                memberWarnings
+                memberBlocks
+                deletedAt
+                createdAt
+                updatedAt
+                accessToken
+            }
+        }
+        metaCounter {
+            total
+        }
+    }
+}
+
 `;
 
 /**************************
@@ -115,6 +120,7 @@ export const GET_ALL_BOARD_ARTICLES_BY_ADMIN = gql`
 				articleImage
 				articleViews
 				articleLikes
+				articleComments
 				memberId
 				createdAt
 				updatedAt
@@ -125,17 +131,20 @@ export const GET_ALL_BOARD_ARTICLES_BY_ADMIN = gql`
 					memberAuthType
 					memberPhone
 					memberNick
-					memberFullName
 					memberImage
 					memberAddress
-					memberDesc
-					memberWarnings
-					memberBlocks
-					memberProperties
-					memberRank
+					memberProduct
+					memberPurchase
+					memberArticles
+					memberFollowers
+					memberFollowings
 					memberPoints
 					memberLikes
 					memberViews
+					memberComments
+					memberRank
+					memberWarnings
+					memberBlocks
 					deletedAt
 					createdAt
 					updatedAt
@@ -147,6 +156,7 @@ export const GET_ALL_BOARD_ARTICLES_BY_ADMIN = gql`
 			}
 		}
 	}
+
 `;
 
 /**************************
@@ -172,17 +182,20 @@ export const GET_COMMENTS = gql`
 					memberAuthType
 					memberPhone
 					memberNick
-					memberFullName
 					memberImage
 					memberAddress
-					memberDesc
-					memberWarnings
-					memberBlocks
-					memberProperties
-					memberRank
+					memberProduct
+					memberPurchase
+					memberArticles
+					memberFollowers
+					memberFollowings
 					memberPoints
 					memberLikes
 					memberViews
+					memberComments
+					memberRank
+					memberWarnings
+					memberBlocks
 					deletedAt
 					createdAt
 					updatedAt
@@ -194,4 +207,5 @@ export const GET_COMMENTS = gql`
 			}
 		}
 	}
+
 `;

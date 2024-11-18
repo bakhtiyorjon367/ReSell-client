@@ -6,17 +6,18 @@
     height: auto;
    .container {
      align-items: center;
+     margin-top: 100px;
      .main {
        width: 1200px;
        height: 900px;
        display: flex;
        flex-direction: row;
-       border-radius: 12px 0px 0px 12px;
+       border-radius: 12px 12px;
        background: #FFF;
-       box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
+       background-image: url("/img/banner/login.PNG");
        .left {
-         width: 50%;
-         height: 100%;
+         width: 100%;
+         height: 90%;
          display: flex;
          flex-direction: column;
          align-items: center;
@@ -26,13 +27,15 @@
            flex-direction: row;
            align-items: center;
            img {
-             width: 40px;
-             height: 40px;
+            width: 30px;
+            height: 40px;
+            border-radius: 50%;
+            transform: rotate(90deg);
            }
            span {
              margin-left: 10px;
              font-family: $font ;
-             font-size: 22px;
+             font-size: 32px;
              font-style: normal;
              font-weight: 600;
              line-height: normal;
@@ -41,13 +44,13 @@
            }
          }
          .info {
-           margin-top: 30px;
+           margin-top: 20px;
            display: flex;
            flex-direction: column;
            align-items: center;
            span {
              font-family: $font;
-             font-size: 20px;
+             font-size: 30px;
              font-style: normal;
              font-weight: 600;
              line-height: normal;
@@ -57,7 +60,7 @@
            p {
              margin-top: 5px;
              font-family: $font;
-             font-size: 14px;
+             font-size: 24px;
              font-style: normal;
              font-weight: 400;
              line-height: 26px;
@@ -66,13 +69,13 @@
            }
          }
          .input-wrap {
-           margin-top: 45px;
+           margin-top: 35px;
            width: 470px;
            display: flex;
            flex-direction: column;
 
           .input-box {
-            margin-top: 20px;
+            margin-top: 35px;
             display: flex;
             flex-direction: column;
             &:first-child {
@@ -81,7 +84,7 @@
             span {
               margin-bottom: 8px;
               font-family: $font;
-              font-size: 14px;
+              font-size: 24px;
               font-style: normal;
               font-weight: 600;
               line-height: normal;
@@ -95,7 +98,7 @@
               border: 1px solid #DDD;
               background:  #FFF;
               font-family: $font;
-              font-size: 14px;
+              font-size: 20px;
               font-style: normal;
               font-weight: 400;
               line-height: 26px;
@@ -104,32 +107,11 @@
           }
          }
          .register {
-           margin-top: 45px;
+           margin-top: 35px;
            width: 470px;
            display: flex;
            flex-direction: column;
            align-items: center;
-           .type-option {
-             display: flex;
-             flex-direction: row;
-             align-items: center;
-             span.text {
-               font-family: $font;
-               font-size: 14px;
-               font-style: normal;
-               font-weight: 600;
-               line-height: normal;
-               color:  #181A20;
-             }
-             div {
-               margin-left: 20px;
-               display: flex;
-               flex-direction: row;
-               &:nth-child(1){
-                 margin-right: 25px;
-               }
-             }
-           }
            .remember-info {
              width: 100%;
              display: flex;
@@ -138,7 +120,7 @@
              align-items: center;
              a {
                font-family: $font;
-               font-size: 14px;
+               font-size: 26px;
                font-style: normal;
                font-weight: 400;
                line-height: 26px;
@@ -153,7 +135,7 @@
              border-radius: 12px;
              background:  #EB6753;
              font-family: $font;
-             font-size: 15px;
+             font-size: 30px;
              font-style: normal;
              font-weight: 600;
              line-height: normal;
@@ -164,14 +146,14 @@
            }
          }
          .ask-info {
-           margin-top: 90px;
+           margin-top: 80px;
            p {
              font-family: $font;
              font-size: 20px;
              font-style: normal;
              line-height: normal;
              font-weight: 400;
-             color:  #181A20;
+             color:  #000000;
              b {
                margin-left: 10px;
                font-weight: 600;
@@ -181,12 +163,6 @@
              }
            }
          }
-       }
-       .right {
-         width: 50%;
-         height: 100%;
-         background-image: url("/img/banner/joinBg.svg");
-         background-size: cover;
        }
      }
    }
