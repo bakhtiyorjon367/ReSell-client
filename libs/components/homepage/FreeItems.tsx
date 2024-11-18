@@ -9,7 +9,6 @@ import { GET_PRODUCTS } from "../../../apollo/user/query";
 import { useMutation, useQuery } from "@apollo/client";
 import { T } from "../../types/common";
 import { Product } from "../../types/product/product";
-import { ProductCategory } from "../../enums/product.enum";
 import { ProductsInquiry } from "../../types/product/product.input";
 import { LIKE_TARGET_PRODUCT } from "../../../apollo/user/mutation";
 import { Message } from '../../enums/common.enum';
@@ -50,7 +49,6 @@ const FreeItems = (props: FreeItemsProps) => {
             });
             await getFreeItemsRefetch({input:initialInput});
 
-            await sweetTopSmallSuccessAlert("success", 800);
         }catch(err:any){
             console.log("ERROR, likeTargetProductHandler", err.message);
             sweetMixinErrorAlert(err.message).then();
