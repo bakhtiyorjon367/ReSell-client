@@ -3,7 +3,6 @@ import { useState } from "react";
 import WestIcon from "@mui/icons-material/West";
 import EastIcon from "@mui/icons-material/East";
 import { Swiper, SwiperSlide } from "swiper/react";
-import FreeItemsCard from "./FreeItemsCard";
 import { useTranslation } from "react-i18next";
 import { ProductsInquiry } from "../../types/product/product.input";
 import { useMutation, useQuery } from "@apollo/client";
@@ -12,8 +11,9 @@ import { Product } from "../../types/product/product";
 import { T } from "../../types/common";
 import { LIKE_TARGET_PRODUCT } from "../../../apollo/user/mutation";
 import { Message } from "../../enums/common.enum";
-import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from "../../sweetAlert";
+import { sweetMixinErrorAlert } from "../../sweetAlert";
 import { ProductCategory } from "../../enums/product.enum";
+import FurnitureCard from "./FurnitureCard";
 
 interface FurnitureProps{
     initialInput: ProductsInquiry;
@@ -48,8 +48,6 @@ const likeProductHandler = async(user:T, id:string) => {
             variables:{input: id}
         });
         await getFurnitureRefetch({input:initialInput});
-
-        await sweetTopSmallSuccessAlert("success", 800);
     }catch(err:any){
         console.log("ERROR, likeTargetProductHandler", err.message);
         sweetMixinErrorAlert(err.message).then();
@@ -91,7 +89,7 @@ const likeProductHandler = async(user:T, id:string) => {
                             {products.map((product, index) => {
                                 return (
                                     <SwiperSlide key={index} className={"card-slide"}>
-                                         <FreeItemsCard product={product} likeProductHandler={likeProductHandler}/>
+                                         <FurnitureCard product={product} likeProductHandler={likeProductHandler}/>
                                         <div style={{color:'white', marginBottom:'-10px'}}>{product.productTitle}</div>
                                         <div style={{color:'white'}}>{product.productPrice},000won</div>
                                     </SwiperSlide>
