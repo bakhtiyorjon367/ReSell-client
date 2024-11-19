@@ -15,7 +15,6 @@ import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { Product } from '../../libs/types/product/product';
 import moment from 'moment';
-import { formatterStr } from '../../libs/utils';
 import { REACT_APP_API_URL } from '../../libs/config';
 import { userVar } from '../../apollo/store';
 import { CommentInput, CommentsInquiry } from '../../libs/types/comment/comment.input';
@@ -141,20 +140,6 @@ const ProductDetail: NextPage = ({ initialComment, ...props }: any) => {
 		}
 	}, [commentInquiry]);
 
-	const { loading, error, data } = useQuery(GET_PRODUCT, {
-        variables: { input: productId },
-        skip: !productId, // Skip query if productId is not set
-        fetchPolicy: 'network-only', // Ensure fresh data
-    });
-
-    // Update product state when data changes
-    useEffect(() => {
-        if (data && data.getProduct) {
-            setProduct(data.getProduct);
-        }
-    }, [data]);
-
-
 	/** HANDLERS **/
 	const likeProductHandler = async(user:T, id:string) => {
 		try{
@@ -224,7 +209,7 @@ const ProductDetail: NextPage = ({ initialComment, ...props }: any) => {
 								</Stack>
 								<Stack className={'right-box'}>
 									{product?.meLiked && product?.meLiked[0]?.myFavorite ? (
-										<FavoriteIcon color="primary" fontSize={'medium'} />
+										<FavoriteIcon color='primary' fontSize={'medium'} />
 									) : (
 										<FavoriteBorderIcon
 											color='secondary'
@@ -273,7 +258,11 @@ const ProductDetail: NextPage = ({ initialComment, ...props }: any) => {
 										<Typography className={'desc'}>{product?.productTitle ?? ''}</Typography>
 										<Typography className={'desc'}>{product?.productDesc ?? 'No Description!'}</Typography>
 										<Typography className={'category'}>{product?.productCategory}</Typography>
-										<Typography className={'price'}>{formatterStr(product?.productPrice)},000won</Typography>
+										{product?.productSharing ? 
+											<p className='share' style={{color:'green', marginTop:'5px', fontSize:'20px'}}>Sharing</p> 
+										: 
+											<p className='price'>{product?.productPrice},000</p>
+										} 
 										<Stack className={'statistics'}>
 											<Stack className="buttons">
 												<Stack className="button-box">
