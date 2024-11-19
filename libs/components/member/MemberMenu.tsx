@@ -5,6 +5,9 @@ import useDeviceDetect from '../../hooks/useDeviceDetect';
 import Link from 'next/link';
 import { Member } from '../../types/member/member';
 import { REACT_APP_API_URL } from '../../config';
+import { useQuery } from '@apollo/client';
+import { GET_MEMBER } from '../../../apollo/user/query';
+import { T } from '../../types/common';
 
 interface MemberMenuProps {
 	subscribeHandler: any;
@@ -20,6 +23,20 @@ const MemberMenu = (props: MemberMenuProps) => {
 	const { memberId } = router.query;
 
 	/** APOLLO REQUESTS **/
+	const {
+		loading: getMemberLoading,
+		data:getMemberData,
+		error: getMemberError,
+		refetch:getMemberRefetch
+	} = useQuery(GET_MEMBER,{
+		fetchPolicy: 'network-only',
+		variables: { input: memberId},
+		skip:!memberId,
+		notifyOnNetworkStatusChange:true,
+		onCompleted: (data: T) => {
+			setMember(data?.getMember);
+		},
+	});
 
 	if (device === 'mobile') {
 		return <div>MEMBER MENU MOBILE</div>;
@@ -39,7 +56,6 @@ const MemberMenu = (props: MemberMenuProps) => {
 							<img src={'/img/icons/call.svg'} alt={'icon'} />
 							<Typography className={'p-number'}>{member?.memberPhone}</Typography>
 						</Box>
-						<Typography className={'view-list'}>{member?.memberType}</Typography>
 					</Stack>
 				</Stack>
 				<Stack className="follow-button-box">
@@ -47,21 +63,22 @@ const MemberMenu = (props: MemberMenuProps) => {
 						<>
 							<Button
 								variant="outlined"
-								sx={{ background: '#b9b9b9' }}
-								onClick={() => unsubscribeHandler(member?._id, null, memberId)}
+								sx={{ background: '#ed5858', ':hover': { background: '#ee7171' } }}
+								onClick={() => unsubscribeHandler(member?._id, getMemberRefetch, memberId)}
 							>
 								Unfollow
 							</Button>
-							<Typography>Following</Typography>
 						</>
 					) : (
 						<Button
 							variant="contained"
-							sx={{ background: '#ff5d18', ':hover': { background: '#ff5d18' } }}
-							onClick={() => subscribeHandler(member?._id, null, memberId)}
+							sx={{ background: '#60eb60d4', ':hover': { background: '#60eb60d4' } }}
+							onClick={() => subscribeHandler(member?._id, getMemberRefetch, memberId)}
 						>
 							Follow
 						</Button>
+							
+						
 					)}
 				</Stack>
 				<Stack className={'sections'}>
@@ -70,24 +87,23 @@ const MemberMenu = (props: MemberMenuProps) => {
 							Details
 						</Typography>
 						<List className={'sub-section'}>
-							{/* {member?.memberType === 'USER' && ( */}
-								<ListItem className={category === 'product' ? 'focus' : ''}>
+								<ListItem className={category === 'products' ? 'focus' : ''}>
 									<Link
 										href={{
 											pathname: '/member',
-											query: { ...router.query, category: 'product' },
+											query: { ...router.query, category: 'products' },
 										}}
 										scroll={false}
 										style={{ width: '100%' }}
 									>
 										<div className={'flex-box'}>
-											{category === 'product' ? (
+											{category === 'products' ? (
 												<img className={'com-icon'} src={'/img/icons/homeWhite.svg'} alt={'com-icon'} />
 											) : (
 												<img className={'com-icon'} src={'/img/icons/home.svg'} alt={'com-icon'} />
 											)}
 											<Typography className={'sub-title'} variant={'subtitle1'} component={'p'}>
-												Product
+												Products
 											</Typography>
 											<Typography className="count-title" variant="subtitle1">
 												{member?.memberProduct}
@@ -95,7 +111,6 @@ const MemberMenu = (props: MemberMenuProps) => {
 										</div>
 									</Link>
 								</ListItem>
-							{/* )} */}
 							<ListItem className={category === 'followers' ? 'focus' : ''}>
 								<Link
 									href={{

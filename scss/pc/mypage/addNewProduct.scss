@@ -7,9 +7,13 @@
 			height: auto;
 			display: flex;
 			flex-direction: column;
-			gap: 35px;
+			gap: 57px;
 			.main-title-box {
-				margin-bottom: 21px;
+				width: auto;
+				height: auto;
+				flex-direction: row;
+				justify-content: center;
+				margin-right: 50px;
 				.main-title {
 					color: #181a20;
 					font-family: $font;

@@ -66,7 +66,7 @@ const MyMenu = () => {
 												pathname: '/mypage',
 												query: { category: 'addProduct' },
 											}}
-											as={`${router.pathname}?category=addProduct`}
+											// as={`${router.pathname}?category=addProduct`}
 											scroll={false}
 										>
 											<div className={'flex-box'}>

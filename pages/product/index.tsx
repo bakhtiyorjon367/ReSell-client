@@ -77,33 +77,12 @@ const ProductList: NextPage = ({ initialInput, ...props }: any) => {
 				variables:{input: id}
 			});
 			await getProductsRefetch();
-			// const currentParams = parseQueryParams();
-
-			// if (currentParams) {
-			//   await getProductsRefetch({
-			// 	input: currentParams
-			//   });
-			// }
-	
 		}catch(err:any){
 			console.log("ERROR, likeTargetProductHandler", err.message);
 			sweetMixinErrorAlert(err.message).then();
 		}
 	};
 	
-	// const parseQueryParams = () => {
-	// 	const input = router.query.input;
-	
-	// 	if (Array.isArray(input)) {
-	// 		return JSON.parse(input[0]);
-	// 	  } else if (typeof input === 'string') {
-	// 		return JSON.parse(input);
-	// 	  }
-	
-	// 	return null;
-	// };
-
-
 	const handlePaginationChange = async (event: ChangeEvent<unknown>, value: number) => {
 		searchFilter.page = value;
 		await router.push(

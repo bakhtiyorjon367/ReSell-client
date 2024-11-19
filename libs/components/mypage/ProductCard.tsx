@@ -73,8 +73,8 @@ export const ProductCard = (props: ProductCardProps) => {
 				<Stack className="status-box">
 					<Stack className="coloured-box" sx={{
 											background: product.productStatus === 'ACTIVE' ? '#E5F0FD' :
-														product.productStatus === 'RESERVED' ? '#FFFF00' :
-														product.productStatus === 'SOLD' ? '#FFCCCB' :
+														product.productStatus === 'RESERVED' ? '#75e892' :
+														product.productStatus === 'SOLD' ? '#a1a4a2' :
 														'#FFFFFF',
 											}}
 						onClick={handleClick}>
@@ -83,6 +83,7 @@ export const ProductCard = (props: ProductCardProps) => {
 						</Typography>
 					</Stack>
 				</Stack>
+				{!memberPage && 
 					<Menu
 						anchorEl={anchorEl}
 						open={open}
@@ -170,8 +171,7 @@ export const ProductCard = (props: ProductCardProps) => {
 							</>
 						)}
 					</Menu>
-				
-
+				}
 				<Stack className="views-box">
 					<Typography className="views">{product.productViews.toLocaleString()}</Typography>
 				</Stack>

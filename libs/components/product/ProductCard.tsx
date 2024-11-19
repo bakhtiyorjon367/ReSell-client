@@ -9,6 +9,7 @@ import { REACT_APP_API_URL } from '../../config';
 import { useReactiveVar } from '@apollo/client';
 import { userVar } from '../../../apollo/store';
 import IconButton from '@mui/material/IconButton';
+import { ProductStatus } from '../../enums/product.enum';
 
 interface ProductCardType {
 	product: Product;
@@ -52,15 +53,14 @@ const ProductCard = (props: ProductCardType) =>{
                         </Link>
                     </Stack>
                     <Stack className="address">
-                        <Typography>
-							{product.dealAddress}, {product.dealAddress}
-						</Typography>
+                        <div style={{color: product.productStatus === ProductStatus.RESERVED ? 'green' : '#d4d000', fontWeight:'bold'}}>{product?.productStatus === ProductStatus.RESERVED ? "Reserved" : (product?.productStatus === ProductStatus.SOLD ? 'Sold' : 
+                            <p> {product.dealAddress}</p>)}</div>
                     </Stack>
                 </Stack>
                 <Stack className="type-buttons">
                     <Stack className="type">
 						  <div>
-								{product.productSharing ? 
+                            {product.productSharing ? 
 									<p className='share'>Sharing</p> 
 								: 
 									<p className='price'>{product.productPrice},000</p>

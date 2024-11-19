@@ -62,11 +62,6 @@
 										height: 16px;
 									}
 								}
-								.view-list {
-									margin-top: 5px;
-									font-weight: 300;
-									color: rgb(187, 187, 187);
-								}
 							}
 						}
 						.follow-button-box {
@@ -76,8 +71,8 @@
 							align-items: center;
 							margin-top: 15px;
 							button {
-								border: 1px solid #b9b9b9;
-								color: #181a20;
+								border: 1px solid #a6a5a5;
+								color: #171616;
 								font-family: $font;
 								font-size: 14px;
 								font-style: normal;
@@ -85,9 +80,9 @@
 								line-height: normal;
 							}
 							p {
-								color: #b9b9b9;
+								color: #424141;
 								font-family: $font;
-								font-size: 14px;
+								font-size: 12px;
 								font-style: italic;
 								font-weight: 400;
 								line-height: normal;
