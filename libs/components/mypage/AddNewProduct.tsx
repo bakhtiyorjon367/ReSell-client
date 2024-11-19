@@ -7,9 +7,11 @@ import { REACT_APP_API_URL } from '../../config';
 import { ProductInput } from '../../types/product/product.input';
 import axios from 'axios';
 import { getJwtToken } from '../../auth';
-import { sweetMixinErrorAlert } from '../../sweetAlert';
-import { useReactiveVar } from '@apollo/client';
+import { sweetConfirmAlert, sweetErrorHandling, sweetMixinErrorAlert, sweetMixinSuccessAlert } from '../../sweetAlert';
 import { userVar } from '../../../apollo/store';
+import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
+import { CREATE_PRODUCT, UPDATE_PRODUCT } from '../../../apollo/user/mutation';
+import { GET_PRODUCT } from '../../../apollo/user/query';
 
 const AddProduct = ({ initialValues, ...props }: any) => {
 	const device = useDeviceDetect();
@@ -21,8 +23,21 @@ const AddProduct = ({ initialValues, ...props }: any) => {
 	const token = getJwtToken();
 	const user = useReactiveVar(userVar);
 
+	// let getProductData: any, getProductLoading: any;
 	/** APOLLO REQUESTS **/
-	let getProductData: any, getProductLoading: any;
+	const [updateProduct] = useMutation(UPDATE_PRODUCT);
+	const [createProduct] = useMutation(CREATE_PRODUCT);
+
+	const {
+		loading: getProductLoading,
+		data: getProductData,
+		error: getProductError,
+		refetch: getProductRefetch
+	} = useQuery(GET_PRODUCT,{
+		fetchPolicy: 'network-only',
+		variables: { input: router.query.productId },
+	});
+
 
 	/** LIFECYCLES **/
 	useEffect(() => {
@@ -109,9 +124,44 @@ const AddProduct = ({ initialValues, ...props }: any) => {
 		}
 	};
 
-	const insertProductHandler = useCallback(async () => {}, [insertProductData]);
+	const insertProductHandler = useCallback(async () => {
+		try{
+			const result = await createProduct({
+				variables:{
+					input: insertProductData
+				}
+			});
+			await router.push({
+				pathname: '/mypage',
+				query:{
+					category: 'myProducts'
+				}
+			});
+		}catch(err:any){
+			await sweetErrorHandling(err).then();
+		}
+	}, [insertProductData]);
 
-	const updateProductHandler = useCallback(async () => {}, [insertProductData]);
+	const updateProductHandler = useCallback(async () => {
+		try{
+			//@ts-ignore
+			insertProductData._id = getProductData?.getProduct?._id;
+			const result = await updateProduct({
+				variables:{
+					input: insertProductData
+				}
+			});
+			await sweetMixinSuccessAlert('Product has been updated successfully');
+			await router.push({
+				pathname: '/mypage',
+				query:{
+					category: 'myProducts'
+					}
+				});
+		}catch(err:any){
+			await sweetErrorHandling(err).then();
+		}
+	}, [insertProductData]);
 
 	if (user?.memberType !== 'USER') {
 		router.back();
@@ -377,7 +427,7 @@ const AddProduct = ({ initialValues, ...props }: any) => {
 						<Stack className="buttons-row">
 							{router.query.productId ? (
 								<Button className="next-button" disabled={doDisabledCheck()} onClick={updateProductHandler}>
-									<Typography className="next-button-text">Save</Typography>
+									<Typography className="next-button-text">Update</Typography>
 								</Button>
 							) : (
 								<Button className="next-button" disabled={doDisabledCheck()} onClick={insertProductHandler}>
