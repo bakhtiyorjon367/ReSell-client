@@ -12,7 +12,7 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
 interface ProductBigCardProps {
 	product: Product;
-	likeProductHandler:any;
+	likeProductHandler?:any;
 };
 
 const ProductBigCard = (props: ProductBigCardProps) => {
@@ -50,7 +50,7 @@ const ProductBigCard = (props: ProductBigCardProps) => {
 					<Divider sx={{ mt: '15px', mb: '17px' }} />
 					<div className={'bott'}>
 						<div>
-							{product?.productSharing ? <p style={{color:'green'}}>SHARING</p> : ('$ '+product?.productPrice)}
+							{product?.productSharing ? <p style={{color:'green'}}>SHARING</p> : (product?.productPrice+',000won')}
 							{product?.productBarter ? <p>Barter</p> : ''}
 						</div>
 						<div className="buttons-box">

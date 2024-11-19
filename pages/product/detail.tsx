@@ -27,7 +27,7 @@ import { CREATE_COMMENT, LIKE_TARGET_PRODUCT } from '../../apollo/user/mutation'
 import { GET_COMMENTS, GET_PRODUCT, GET_PRODUCTS } from '../../apollo/user/query';
 import { Direction, Message } from '../../libs/enums/common.enum';
 import { T } from '../../libs/types/common';
-import { sweetErrorHandling, sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../libs/sweetAlert';
+import { sweetErrorHandling, sweetMixinErrorAlert, sweetTopSmallSuccessAlert, sweetTopSuccessAlert } from '../../libs/sweetAlert';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
@@ -66,7 +66,7 @@ const ProductDetail: NextPage = ({ initialComment, ...props }: any) => {
 		error:getProductError, 
 		refetch:getProductRefetch
 	} = useQuery(GET_PRODUCT, {
-		fetchPolicy:"network-only",
+		fetchPolicy:"cache-and-network",
 		variables:{ input: productId},
 		skip:!productId,
 		notifyOnNetworkStatusChange:true,
@@ -149,14 +149,20 @@ const ProductDetail: NextPage = ({ initialComment, ...props }: any) => {
 			await likeTargetProduct({
 				variables:{input: id}
 			});
-			await getProductsRefetch({
-				variables:{input: id}
-			});
-			
 			await getProductRefetch({
-				variables:{input: product?._id}
+				variables:{input: id}
+			})
+			await getProductsRefetch({
+				input:{
+					page:1,
+					limit:4,
+					sort:"createdAt",
+					direction:Direction.DESC,
+					search:{
+						memberId:product?.memberId
+					}
+				}
 			});
-
 		}catch(err:any){
 			console.log("ERROR, likeTargetProductHandler", err.message);
 			sweetMixinErrorAlert(err.message).then();
