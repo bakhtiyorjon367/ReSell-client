@@ -66,7 +66,7 @@ const ProductDetail: NextPage = ({ initialComment, ...props }: any) => {
 		error:getProductError, 
 		refetch:getProductRefetch
 	} = useQuery(GET_PRODUCT, {
-		fetchPolicy:"cache-and-network",
+		fetchPolicy:"network-only",
 		variables:{ input: productId},
 		skip:!productId,
 		notifyOnNetworkStatusChange:true,

@@ -14,11 +14,11 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 interface CommunityCardProps {
 	boardArticle: BoardArticle;
-	size?: string;
+	likeArticleHandler?:any;
 }
 
 const CommunityCard = (props: CommunityCardProps) => {
-	const { boardArticle, size = 'normal' } = props;
+	const { boardArticle, likeArticleHandler  } = props;
 	const device = useDeviceDetect();
 	const router = useRouter();
 	const user = useReactiveVar(userVar);
@@ -72,11 +72,11 @@ const CommunityCard = (props: CommunityCardProps) => {
 				<Stack className="image-box">
 					<img src={imagePath} alt="" className="card-img" onClick={(e) => chooseArticleHandler(e, boardArticle)}/>
 					<Stack className={'buttons'}>
-						<IconButton color={'default'}>
+						<IconButton color={'default'} >
 							<RemoveRedEyeIcon />
 						</IconButton>
 						<Typography className="view-cnt">{boardArticle?.articleViews}</Typography>
-						<IconButton color={'default'}>
+						<IconButton color={'default'} onClick={(e:any)=>likeArticleHandler(e, user, boardArticle?._id)}>
 							{boardArticle?.meLiked && boardArticle?.meLiked[0]?.myFavorite ? (
 								<FavoriteIcon color={'primary'} />
 							) : (

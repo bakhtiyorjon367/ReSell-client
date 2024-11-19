@@ -9,6 +9,7 @@ import UserCard from '../../libs/components/common/UserCard';
 import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Member } from '../../libs/types/member/member';
+import withLayoutFull from '../../libs/components/layout/LayoutFull';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -180,4 +181,4 @@ UserList.defaultProps = {
 	},
 };
 
-export default withLayoutBasic(UserList);
+export default withLayoutFull(UserList);
