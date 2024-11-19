@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, Typography, Box } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';

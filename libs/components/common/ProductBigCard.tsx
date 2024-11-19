@@ -50,7 +50,7 @@ const ProductBigCard = (props: ProductBigCardProps) => {
 					<Divider sx={{ mt: '15px', mb: '17px' }} />
 					<div className={'bott'}>
 						<div>
-							{product?.productSharing ? <p style={{color:'green'}}>SHARING</p> : (product?.productPrice+',000won')}
+							{product?.productSharing ? <p style={{color:'green'}}>SHARING</p> : (product?.productPrice+',000')}
 							{product?.productBarter ? <p>Barter</p> : ''}
 						</div>
 						<div className="buttons-box">
