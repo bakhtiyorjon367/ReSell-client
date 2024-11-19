@@ -3,23 +3,41 @@ import { NextPage } from 'next';
 import { Pagination, Stack, Typography } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import { ProductCard } from './ProductCard';
-import { useReactiveVar } from '@apollo/client';
 import { Product } from '../../types/product/product';
 import { UserProductsInquiry } from '../../types/product/product.input';
 import { T } from '../../types/common';
 import { ProductStatus } from '../../enums/product.enum';
 import { userVar } from '../../../apollo/store';
 import { useRouter } from 'next/router';
+import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
+import { UPDATE_PRODUCT } from '../../../apollo/user/mutation';
+import { GET_USER_PRODUCTS } from '../../../apollo/user/query';
+import { sweetConfirmAlert, sweetErrorHandling } from '../../sweetAlert';
 
 const MyProducts: NextPage = ({ initialInput, ...props }: any) => {
 	const device = useDeviceDetect();
 	const [searchFilter, setSearchFilter] = useState<UserProductsInquiry>(initialInput);
-	const [UserProducts, setUserProducts] = useState<Product[]>([]);
+	const [userProducts, setUserProducts] = useState<Product[]>([]);
 	const [total, setTotal] = useState<number>(0);
 	const user = useReactiveVar(userVar);
 	const router = useRouter();
 
 	/** APOLLO REQUESTS **/
+	const [updateProduct] = useMutation(UPDATE_PRODUCT);
+	const {
+		loading: getUserProductsLoading,
+		data: getUserProductsData,
+		error:getUserProductsError,
+		refetch:getUserProductsRefetch
+	} = useQuery(GET_USER_PRODUCTS,{
+		fetchPolicy: 'network-only',
+		variables: {input: searchFilter},
+		notifyOnNetworkStatusChange:true,
+		onCompleted: (data:T) => {
+			setUserProducts(data?.getUserProducts?.list);
+			setTotal(data?.getUserProducts?.metaCounter[0]?.total ?? 0);
+		}
+	});
 
 	/** HANDLERS **/
 	const paginationHandler = (e: T, value: number) => {
@@ -30,16 +48,46 @@ const MyProducts: NextPage = ({ initialInput, ...props }: any) => {
 		setSearchFilter({ ...searchFilter, search: { productStatus: value } });
 	};
 
-	const deleteProductHandler = async (id: string) => {};
+	const deleteProductHandler = async (id: string) => {
+		try{
+			if(await sweetConfirmAlert(`Are you sure to delete?`)){
+				await updateProduct({
+					variables:{
+						input: {
+							_id:id,
+							productStatus:'DELETE',
+						},
+					},
+				});
+				await getUserProductsRefetch({input:searchFilter});
+			}
+		}catch(err:any){
+			await sweetErrorHandling(err);
+		};
+	};
 
-	const updateProductHandler = async (status: string, id: string) => {};
+	const updateProductHandler = async (status: string, id: string) => {
+		try{
+			await updateProduct({
+				variables:{
+					input: {
+						_id:id,
+						productStatus:status,
+					},
+				},
+			});
+			await getUserProductsRefetch({input: searchFilter});
+		}catch(err:any){
+			await sweetErrorHandling(err);
+		}
+	};
 
 	if (user?.memberType !== 'USER') {
 		router.back();
 	}
 
 	if (device === 'mobile') {
-		return <div>RESELL Products MOBILE</div>;
+		return <div>RESELL PRODUCTS MOBILE</div>;
 	} else {
 		return (
 			<div id="my-product-page">
@@ -78,13 +126,13 @@ const MyProducts: NextPage = ({ initialInput, ...props }: any) => {
 							<Typography className="title-text">Action</Typography>
 						</Stack>
 
-						{UserProducts?.length === 0 ? (
+						{userProducts?.length === 0 ? (
 							<div className={'no-data'}>
 								<img src="/img/icons/icoAlert.svg" alt="" />
 								<p>No Product found!</p>
 							</div>
 						) : (
-							UserProducts.map((product: Product) => {
+							userProducts.map((product: Product) => {
 								return (
 									<ProductCard
 										product={product}
@@ -95,7 +143,7 @@ const MyProducts: NextPage = ({ initialInput, ...props }: any) => {
 							})
 						)}
 
-						{UserProducts.length !== 0 && (
+						{userProducts.length !== 0 && (
 							<Stack className="pagination-config">
 								<Stack className="pagination-box">
 									<Pagination

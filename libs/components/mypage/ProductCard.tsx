@@ -62,22 +62,27 @@ export const ProductCard = (props: ProductCardProps) => {
 					<Typography className="name">{product.productTitle}</Typography>
 					<Typography className="address">{product.dealAddress}</Typography>
 					<Typography className="price">
-						<strong>${formatterStr(product?.productPrice)}</strong>/ mo
+						<strong>{formatterStr(product?.productPrice)+',000'}</strong>
 					</Typography>
 				</Stack>
 				<Stack className="date-box">
 					<Typography className="date">
-						<Moment format="DD MMMM, YYYY">{product.createdAt}</Moment>
+						<Moment format="DD MM, YYYY">{product.createdAt}</Moment>
 					</Typography>
 				</Stack>
 				<Stack className="status-box">
-					<Stack className="coloured-box" sx={{ background: '#E5F0FD' }} onClick={handleClick}>
-						<Typography className="status" sx={{ color: '#3554d1' }}>
+					<Stack className="coloured-box" sx={{
+											background: product.productStatus === 'ACTIVE' ? '#E5F0FD' :
+														product.productStatus === 'RESERVED' ? '#FFFF00' :
+														product.productStatus === 'SOLD' ? '#FFCCCB' :
+														'#FFFFFF',
+											}}
+						onClick={handleClick}>
+						<Typography className="status" sx={{color: '#000000' }}>
 							{product.productStatus}
 						</Typography>
 					</Stack>
 				</Stack>
-				{!memberPage && product.productStatus !== 'SOLD' && (
 					<Menu
 						anchorEl={anchorEl}
 						open={open}
@@ -85,7 +90,7 @@ export const ProductCard = (props: ProductCardProps) => {
 						PaperProps={{
 							elevation: 0,
 							sx: {
-								width: '70px',
+								width: '80px',
 								mt: 1,
 								ml: '10px',
 								overflow: 'visible',
@@ -109,21 +114,78 @@ export const ProductCard = (props: ProductCardProps) => {
 								>
 									Sold
 								</MenuItem>
+								<MenuItem
+									disableRipple
+									onClick={() => {
+										handleClose();
+										updateProductHandler(ProductStatus.RESERVED, product?._id);
+									}}
+								>
+									Reserved
+								</MenuItem>
+							</>
+						)}
+						{product.productStatus === 'SOLD' && (
+							<>
+								<MenuItem
+									disableRipple
+									onClick={() => {
+										handleClose();
+										updateProductHandler(ProductStatus.ACTIVE, product?._id);
+									}}
+								>
+									Active
+								</MenuItem>
+								<MenuItem
+									disableRipple
+									onClick={() => {
+										handleClose();
+										updateProductHandler(ProductStatus.RESERVED, product?._id);
+									}}
+								>
+									Reserved
+								</MenuItem>
+							</>
+						)}
+						{product.productStatus === 'RESERVED' && (
+							<>
+								<MenuItem
+									disableRipple
+									onClick={() => {
+										handleClose();
+										updateProductHandler(ProductStatus.ACTIVE, product?._id);
+									}}
+								>
+									Active
+								</MenuItem>
+								<MenuItem
+									disableRipple
+									onClick={() => {
+										handleClose();
+										updateProductHandler(ProductStatus.SOLD, product?._id);
+									}}
+								>
+									Sold
+								</MenuItem>
 							</>
 						)}
 					</Menu>
-				)}
+				
 
 				<Stack className="views-box">
 					<Typography className="views">{product.productViews.toLocaleString()}</Typography>
 				</Stack>
 				{!memberPage && (
 					<Stack className="action-box">
-						<IconButton className="icon-button" onClick={() => pushEditProduct(product._id)}>
-							<ModeIcon className="buttons" />
-						</IconButton>
 						<IconButton className="icon-button" onClick={() => deleteProductHandler(product._id)}>
 							<DeleteIcon className="buttons" />
+						</IconButton>
+					</Stack>
+				)}
+				{!memberPage && product.productStatus === ProductStatus.ACTIVE &&(
+					<Stack className="action-box">
+						<IconButton className="icon-button" onClick={() => pushEditProduct(product._id)}>
+							<ModeIcon className="buttons" />
 						</IconButton>
 					</Stack>
 				)}
