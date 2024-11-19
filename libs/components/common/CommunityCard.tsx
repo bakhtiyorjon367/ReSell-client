@@ -65,9 +65,8 @@ const CommunityCard = (props: CommunityCardProps) => {
 							</Moment>
 							<Moment className="day" format={'DD'}>{boardArticle?.createdAt}</Moment>
 						</Stack>
-						<Typography className="title" onClick={(e) => chooseArticleHandler(e, boardArticle)}>{boardArticle?.articleTitle}</Typography>
 					</Stack>
-					<Stack className='content'>{boardArticle?.articleContent}</Stack>
+					<Stack className='content' onClick={(e) => chooseArticleHandler(e, boardArticle)}>{boardArticle?.articleTitle}</Stack>
 				</Stack>
 				<Stack className="image-box">
 					<img src={imagePath} alt="" className="card-img" onClick={(e) => chooseArticleHandler(e, boardArticle)}/>

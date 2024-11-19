@@ -233,6 +233,7 @@
 	position: relative;
 	flex-direction: row;
 	justify-content: space-between;
+	width: 100%;
 	height: auto;
 	gap: 20px;
 	border-radius: 12px;
@@ -243,17 +244,6 @@
 		flex-direction: column;
 		width: 70%;
 		padding-left: 10px;
-		.title {
-			color: #444444;
-			font-family: $font;
-			font-size: 18px;
-			font-style: normal;
-			font-weight: 400;
-			line-height: normal;
-			text-decoration: underline;
-			padding: 1px;
-			cursor: pointer;
-		}
 		.desc {
 			color: #181a20;
 			font-family: $font;
@@ -308,13 +298,13 @@
 			cursor: pointer;
 		}
 		.buttons {
-			position: absolute;
+			position: relative;
 			display: flex;
 			flex-direction: row;
-			justify-content: space-between;
-			align-items: center;
-			top: 260px;
-			right: 30px;
+			justify-content: flex-end;
+			margin-top: -40px;
+			border-radius: 0 0 12px 12px;
+			background: rgba(115, 114, 114, 0.5);
 			svg {
 				width: 34px;
 				height: 24px;
