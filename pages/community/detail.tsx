@@ -24,7 +24,8 @@ import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import { CREATE_COMMENT, LIKE_TARGET_BOARD_ARTICLE, UPDATE_COMMENT } from '../../apollo/user/mutation';
 import { GET_BOARD_ARTICLE,  GET_COMMENTS } from '../../apollo/user/query';
 import { Messages } from '../../libs/config';
-import { sweetMixinErrorAlert } from '../../libs/sweetAlert';
+import { sweetConfirmAlert, sweetMixinErrorAlert } from '../../libs/sweetAlert';
+import { CommentUpdate } from '../../libs/types/comment/comment.update';
 const ToastViewerComponent = dynamic(() => import('../../libs/components/community/TViewer'), { ssr: false });
 
 export const getStaticProps = async ({ locale }: any) => ({
@@ -120,6 +121,28 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 		);
 	};
 
+	const likeBoardArticleHandler = async(user:any, id:any) => {
+		try{
+			if(likeLoading) return;
+			if(!id) return;
+			if(!user._id) throw new Error(Messages.error2);
+
+			setLikeLoading(true);
+
+			await likeTargetBoardArticle({
+				variables:{
+					input:id,
+				},
+			});
+			await boardArticleRefetch({input:articleId});
+		}catch(err:any){
+			console.error('ERROR: likeBoardArticleHandler',err.message);
+			sweetMixinErrorAlert(err.message).then();
+		}finally	{
+			setLikeLoading(false);
+		}
+	};
+
 	const creteCommentHandler = async () => {
 		if(!comment) return;
 		try{
@@ -142,7 +165,42 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 		}
 	};
 
-	const updateButtonHandler = async (commentId: string, commentStatus?: CommentStatus.DELETE) => {};
+	const updateButtonHandler = async (commentId: string, commentStatus?: CommentStatus.DELETE) => {
+		try{
+			if(!user._id) throw new Error(Messages.error2);
+			if(!commentId) throw new Error ('Select a coment to update!');
+			if(updatedComment === comments?.find((comment) => comment?._id === commentId)?.commentContent) return;
+
+			const updateData: CommentUpdate = {
+				_id: commentId,
+				...(commentStatus && { commentStatus: commentStatus}),
+				...(updatedComment && { commentContent: updatedComment}),
+			};
+
+			if(!updateData?.commentContent && !updateData?.commentStatus)
+				throw new Error('Provide data to update your commment!');
+
+			if(commentStatus) {
+				if(await sweetConfirmAlert('Do you want to delete the comment? ')){
+					await updateComment ({
+						variables: {input: updateData},
+					});
+				}else return;
+			}else {
+				await updateComment ({
+					variables: {input: updateData},
+				});
+			}
+			await getCommentsRefetch({input:searchFilter});
+		}catch(err:any){
+			sweetMixinErrorAlert(err.message);
+		} finally {
+			setOpenBackdrop(false);
+			setUpdatedComment('');
+			setUpdatedCommentWordsCnt(0);
+			setUpdatedCommentId('');
+		}
+	};
 
 	const getCommentMemberImage = (imageUrl: string | undefined) => {
 		if (imageUrl) return `${process.env.REACT_APP_API_URL}/${imageUrl}`;
@@ -210,8 +268,11 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 										</Typography>
 										
 										<Stack className="info">
-											<Stack className="icon-info">
-												{boardArticle?.meLiked ? <ThumbUpAltIcon /> : <ThumbUpOffAltIcon />}
+											<Stack className="icon-info" sx={{cursor:'pointer'}}>
+												{boardArticle?.meLiked ? 
+												<ThumbUpAltIcon onClick={()=> likeBoardArticleHandler(user,boardArticle?._id)}/>
+												: 
+												<ThumbUpOffAltIcon onClick={()=> likeBoardArticleHandler(user,boardArticle?._id)}/>}
 
 												<Typography className="text">{boardArticle?.articleLikes}</Typography>
 											</Stack>
