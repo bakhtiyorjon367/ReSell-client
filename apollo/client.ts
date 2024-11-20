@@ -28,6 +28,31 @@ const tokenRefreshLink = new TokenRefreshLink({
 	},
 });
 
+//Custom WebSocket clienats
+class LoggingWebScoket {
+	private socket: WebSocket;
+
+	constructor(url: string){
+		this.socket = new WebSocket(url);
+
+		this.socket.onopen = () => {
+			console.log('Web Socket Connection!')
+		};
+		this.socket.onmessage =(msg) =>{
+			console.log('WebSocket Message', msg.data);
+		};
+		this.socket.onerror =(error) => {
+			console.log('WebSocket error', error);
+		};
+	}
+	send(data: string | ArrayBuffer | SharedArrayBuffer | Blob | ArrayBufferView) {
+		this.socket.send(data);
+	}
+	close(){
+		this.socket.close();
+	}
+}
+
 function createIsomorphicLink() {
 	if (typeof window !== 'undefined') {
 		const authLink = new ApolloLink((operation, forward) => {
@@ -56,6 +81,7 @@ function createIsomorphicLink() {
 					return { headers: getHeaders() };
 				},
 			},
+			webSocketImpl: LoggingWebScoket,
 		});
 
 		const errorLink = onError(({ graphQLErrors, networkError, response }) => {
