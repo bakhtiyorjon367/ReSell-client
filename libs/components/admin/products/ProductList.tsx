@@ -155,16 +155,25 @@ export const ProductPanelList = (props: ProductPanelListType) => {
 									<TableRow hover key={product?._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
 										<TableCell align="left">{product._id}</TableCell>
 										<TableCell align="left" className={'name'}>
+										{product.productStatus != ProductStatus.DELETE ? (
 											<Stack direction={'row'}>
-												<Link href={`/product/detail?id=${product?._id}`}>
+											<Link href={`/product/detail?id=${product?._id}`}>
+												<div>
+													<Avatar alt="Remy Sharp" src={productImage} sx={{ ml: '2px', mr: '10px', height:'90px', width:'90px' }} />
+												</div>
+											</Link>
+											<Link href={`/product/detail?id=${product?._id}`}>
+												<div>{product.productTitle}</div>
+											</Link>
+										</Stack>
+										) : (
+											<Stack direction={'row'}>
 													<div>
-														<Avatar alt="Remy Sharp" src={productImage} sx={{ ml: '2px', mr: '10px' }} />
+														<Avatar alt="Remy Sharp" src={productImage} sx={{ ml: '2px', mr: '10px'}} />
 													</div>
-												</Link>
-												<Link href={`/product/detail?id=${product?._id}`}>
 													<div>{product.productTitle}</div>
-												</Link>
 											</Stack>
+										)}		
 										</TableCell>
 										<TableCell align="center">{product.productPrice}</TableCell>
 										<TableCell align="center">{product.memberData?.memberNick}</TableCell>
@@ -182,6 +191,9 @@ export const ProductPanelList = (props: ProductPanelListType) => {
 											)}
 
 											{product.productStatus === ProductStatus.SOLD && (
+												<Button className={'badge info'} sx={{background:'#c7bfbf'}}>{product.productStatus}</Button>
+											)}
+											{product.productStatus === ProductStatus.RESERVED && (
 												<Button className={'badge warning'}>{product.productStatus}</Button>
 											)}
 

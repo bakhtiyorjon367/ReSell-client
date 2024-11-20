@@ -40,7 +40,7 @@ export const UPDATE_MEMBER_BY_ADMIN = gql`
  *        PROPERTY        *
  *************************/
 
-export const UPDATE_PROPERTY_BY_ADMIN = gql`
+export const UPDATE_PRODUCT_BY_ADMIN = gql`
 	mutation UpdateProductByAdmin ($input: ProductUpdate!){
     updateProductByAdmin(input: $input) {
         _id
