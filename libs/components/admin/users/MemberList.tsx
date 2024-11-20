@@ -67,7 +67,7 @@ const headCells: readonly HeadCell[] = [
 		id: 'phone',
 		numeric: true,
 		disablePadding: false,
-		label: 'PHONE NUM',
+		label: 'PHONE NUMBER',
 	},
 	{
 		id: 'type',
