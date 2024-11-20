@@ -418,8 +418,13 @@ body::-webkit-scrollbar {
 					display: flex;
 					flex-direction: column;
 					.msg-right{
-						background-color: #7c7c7c;
-						color: rgb(255, 255, 255);
+						padding: 14px;
+						width: auto;
+						height: auto;
+						display: flex;
+						font-size: 18px;
+						background-color: #3c96cf;
+						color: #fff;
 					}
 					.msg-left {
 						margin-left: 10px;
@@ -427,9 +432,11 @@ body::-webkit-scrollbar {
 						width: auto;
 						height: auto;
 						display: flex;
-						background: #3c96cf;
+						font-size: 18px;
+						background-color: #7c7c7c;
+						color: rgb(255, 255, 255);
 						border-radius: 20px 20px 20px 0px;
-						color: #fff;
+						
 					}
 				}
 			}
@@ -442,7 +449,7 @@ body::-webkit-scrollbar {
 				border-top: 1px solid rgba(205, 205, 205, 0.83);
 				.msg-input {
 					padding: 20px;
-					width: 276px;
+					width: 380px;
 					height: 50px;
 					display: flex;
 					flex-direction: column;
@@ -454,7 +461,7 @@ body::-webkit-scrollbar {
 					font-family: 'Poppins';
 					font-style: normal;
 					font-weight: 400;
-					font-size: 16px;
+					font-size: 22px;
 					line-height: 24px;
 				}
 				.send-msg-btn {
