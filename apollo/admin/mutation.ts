@@ -37,7 +37,7 @@ export const UPDATE_MEMBER_BY_ADMIN = gql`
 `;
 
 /**************************
- *        PROPERTY        *
+ *        PRODUCT        *
  *************************/
 
 export const UPDATE_PRODUCT_BY_ADMIN = gql`
@@ -156,4 +156,88 @@ export const REMOVE_COMMENT_BY_ADMIN = gql`
     }
 }
 
+`;
+
+/**************************
+ *         NOTICE        *
+ *************************/
+
+export const CREATE_NOTICE = gql` 
+    mutation CreateNotice($input:NoticeInput!) {
+        createNotice(input: $input) {
+            _id
+            noticeCategory
+            noticeStatus
+            noticeTitle
+            noticeContent
+            memberId
+            createdAt
+            updatedAt
+        }
+    }
+`;
+
+export const UPDATE_NOTICE = gql` 
+    mutation UpdateNotice($input: NoticeUpdate!) {
+        updateNotice(input: $input) {
+            _id
+            noticeCategory
+            noticeStatus
+            noticeTitle
+            noticeContent
+            memberId
+            createdAt
+            updatedAt
+        }
+    }
+`;
+
+export const REMOVE_NOTICE = gql` 
+    mutation RemoveNotice($input:String!) {
+        removeNotice(noticeId: $input) {
+            _id
+            noticeCategory
+            noticeStatus
+            noticeTitle
+            noticeContent
+            memberId
+            createdAt
+            updatedAt
+        }
+    }
+`;
+
+export const GET_NOTICES = gql`
+    query GetNotices ($input:NoticesInquiry!){
+        getNotices(input: $input) {
+            list {
+                _id
+                noticeCategory
+                noticeStatus
+                noticeTitle
+                noticeContent
+                memberId
+                createdAt
+                updatedAt
+            }
+            metaCounter {
+                total
+            }
+        }
+    }
+ `;
+
+export const GET_NOTICE = gql` 
+    query GetNotice($input: String!) {
+        getNotice(noticeId: $input) {
+            _id
+            noticeCategory
+            noticeStatus
+            noticeTitle
+            noticeContent
+            memberId
+            createdAt
+            updatedAt
+        }
+    }
 `;
