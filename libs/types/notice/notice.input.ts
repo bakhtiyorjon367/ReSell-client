@@ -17,6 +17,7 @@ interface NSearch {
 
 export interface NoticesInquiry {
    page:number;
+   limit:number;
    sort?:string;
    search: NSearch;
 };

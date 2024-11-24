@@ -45,20 +45,14 @@ const AdminMenuList = (props: any) => {
 		}
 
 		switch (pathnames[2]) {
-			case 'logs':
-				setClickSubMenu('Logs');
-				break;
-			case 'inquiry':
-				setClickSubMenu('1:1 Inquiry');
-				break;
 			case 'notice':
 				setClickSubMenu('Notice');
 				break;
 			case 'faq':
 				setClickSubMenu('FAQ');
 				break;
-			case 'board_create':
-				setClickSubMenu('Board Create');
+			case 'terms':
+				setClickSubMenu('TERMS');
 				break;
 			default:
 				setClickSubMenu('List');
@@ -95,7 +89,8 @@ const AdminMenuList = (props: any) => {
 		},
 		{
 			title: 'Cs',
-			icon: <Headset size={20} color="#bdbdbd" weight="fill" />,
+			icon:<Headset size={20} color="#bdbdbd" weight='fill'/>,
+			add: <></>,
 			on_click: () => subMenuChangeHandler('Cs'),
 		},
 	];
@@ -107,6 +102,7 @@ const AdminMenuList = (props: any) => {
 		Cs: [
 			{ title: 'FAQ', url: '/_admin/cs/faq' },
 			{ title: 'Notice', url: '/_admin/cs/notice' },
+			{ title: 'Terms', url: '/_admin/cs/terms' },
 		],
 	};
 
@@ -134,6 +130,7 @@ const AdminMenuList = (props: any) => {
 							{item.icon}
 						</ListItemIcon>
 						<ListItemText>{item.title}</ListItemText>
+						<p style={{color:'red', marginRight:'20px'}} onClick={() => router.push(`/_admin/cs/_create`)}>{item.add ? 'Add' : ''} </p>
 						{clickMenu.find((menu: string) => item.title === menu) ? <ExpandLess /> : <ExpandMore />}
 					</ListItemButton>
 					<Collapse

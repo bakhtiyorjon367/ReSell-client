@@ -39,12 +39,6 @@ const headCells: readonly HeadCell[] = [
 		label: 'TITLE',
 	},
 	{
-		id: 'id',
-		numeric: true,
-		disablePadding: false,
-		label: 'Event date',
-	},
-	{
 		id: 'content',
 		numeric: true,
 		disablePadding: false,
@@ -95,7 +89,7 @@ interface NoticeListType {
 	anchorEl?: any;
 }
 
-export const NoticeList = (props: NoticeListType) => {
+export const TermsList = (props: NoticeListType) => {
 	const {
 		notices,
 		updateNoticeHandler,
@@ -130,7 +124,6 @@ export const NoticeList = (props: NoticeListType) => {
 								<TableRow hover key={'member._id'} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
 									<TableCell align="left">{notice.noticeCategory}</TableCell>
 									<TableCell align="left">{notice.noticeTitle}</TableCell>
-									<TableCell align="left">{notice.noticeEventDate}</TableCell>
 									<TableCell align="left">{notice.noticeContent ?? 'None'}</TableCell>
 									<TableCell align="left">
 											<>

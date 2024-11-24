@@ -4,7 +4,7 @@ import { TotalCounter } from "../product/product";
 export interface Notice {
     _id: string;
     noticeCategory: NoticeCategory;
-    faqCategory?:FAQCategory,
+    faqCategory:FAQCategory,
     noticeStatus: NoticeStatus;
     noticeTitle:String;
     noticeContent?:String;

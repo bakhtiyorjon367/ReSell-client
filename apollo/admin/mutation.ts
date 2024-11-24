@@ -213,9 +213,11 @@ export const GET_NOTICES = gql`
             list {
                 _id
                 noticeCategory
+                faqCategory
                 noticeStatus
                 noticeTitle
                 noticeContent
+                noticeEventDate
                 memberId
                 createdAt
                 updatedAt
@@ -235,6 +237,7 @@ export const GET_NOTICE = gql`
             noticeStatus
             noticeTitle
             noticeContent
+            noticeEventDate
             memberId
             createdAt
             updatedAt

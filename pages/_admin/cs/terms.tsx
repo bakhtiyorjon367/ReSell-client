@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import type { NextPage } from 'next';
 import withAdminLayout from '../../../libs/components/layout/LayoutAdmin';
-import { Box} from '@mui/material';
+import { Box } from '@mui/material';
 import { List, ListItem } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import { TabContext } from '@mui/lab';
 import TablePagination from '@mui/material/TablePagination';
-import { NoticeList } from '../../../libs/components/admin/cs/NoticeList';
 import { sweetConfirmAlert, sweetErrorHandling } from '../../../libs/sweetAlert';
 import { NoticeCategory, NoticeStatus } from '../../../libs/enums/notice.enum';
 import { GET_NOTICES, REMOVE_NOTICE, UPDATE_NOTICE } from '../../../apollo/admin/mutation';
@@ -16,8 +15,8 @@ import { T } from '../../../libs/types/common';
 import { Notices } from '../../../libs/types/notice/notice';
 import { NoticesInquiry } from '../../../libs/types/notice/notice.input';
 import { NoticeUpdate } from '../../../libs/types/notice/notice.update';
+import { TermsList } from '../../../libs/components/admin/cs/TermsList';
 import router from 'next/router';
-
 
 const AdminNotice: NextPage = ({initialInquiry, ...props}: any) => {
 	const [anchorEl, setAnchorEl] = useState<[] | HTMLElement[]>([]);
@@ -84,20 +83,20 @@ const AdminNotice: NextPage = ({initialInquiry, ...props}: any) => {
 		switch (newValue) {
 			case 'HOLD':
 				setNoticeInquiry({ ...noticeInquiry, search: { noticeStatus: NoticeStatus.HOLD } });
-				noticeCategory = NoticeCategory.EVENT;
+				noticeCategory = NoticeCategory.TERMS;
 				break;
 			case 'ACTIVE':
 				setNoticeInquiry({ ...noticeInquiry, search: { noticeStatus: NoticeStatus.ACTIVE } });
-				noticeCategory = NoticeCategory.EVENT;
+				noticeCategory = NoticeCategory.TERMS;
 				break;
 			case 'DELETE':
 				setNoticeInquiry({ ...noticeInquiry, search: { noticeStatus: NoticeStatus.DELETE } });
-				noticeCategory = NoticeCategory.EVENT;
+				noticeCategory = NoticeCategory.TERMS;
 				break;
 			default:
 				delete noticeInquiry?.search?.noticeStatus;
 				setNoticeInquiry({ ...noticeInquiry });
-				noticeCategory = NoticeCategory.EVENT;
+				noticeCategory = NoticeCategory.TERMS;
 				break;
 		}
 		setNoticeInquiry(prevState => ({
@@ -118,6 +117,7 @@ const AdminNotice: NextPage = ({initialInquiry, ...props}: any) => {
 			});
 			menuIconCloseHandler();
 			await getNoticesRefetch({input:noticeInquiry});
+
 		}catch(err: any) {
 			menuIconCloseHandler();
 			sweetErrorHandling(err).then();
@@ -141,7 +141,7 @@ const AdminNotice: NextPage = ({initialInquiry, ...props}: any) => {
 		// @ts-ignore
 		<Box component={'div'} className={'content'}  style={{ minHeight:'1300px' }}>
 			<Box component={'div'} className={'title flex_space'}>
-				<Typography variant={'h2'}>Notice Management</Typography>
+				<Typography variant={'h2'}>Terms Management</Typography>
 			</Box>
 			<Box component={'div'} className={'table-wrap'}>
 				<Box component={'div'} sx={{ width: '100%', typography: 'body1' }}>
@@ -179,7 +179,7 @@ const AdminNotice: NextPage = ({initialInquiry, ...props}: any) => {
 							</List>
 							<Divider />
 						</Box>
-						<NoticeList
+						<TermsList
 							notices = {notices}
 							updateNoticeHandler = {updateNoticeHandler}
 							removeNoticeHandler = {removeNoticeHandler}
@@ -189,11 +189,11 @@ const AdminNotice: NextPage = ({initialInquiry, ...props}: any) => {
 						/>
 
 						<TablePagination
-							rowsPerPageOptions={[20, 40, 60]}
+							rowsPerPageOptions={[10,20, 40, 60]}
 							component="div"
 							count={noticeTotal}
 							rowsPerPage={noticeInquiry?.limit}
-							page={noticeInquiry?.page - 1}
+							page={noticeInquiry?.page-1}
 							onPageChange={changePageHandler}
 							onRowsPerPageChange={changeRowsPerPageHandler}
 						/>
@@ -210,7 +210,7 @@ AdminNotice.defaultProps = {
         limit: 10,
         sort: 'createdAt',
         search: {
-            noticeCategory: NoticeCategory.EVENT
+            noticeCategory: NoticeCategory.TERMS
         },
     },
 };

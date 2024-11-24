@@ -1,24 +1,44 @@
-import React, { useState } from 'react';
-import { useMutation, useReactiveVar } from '@apollo/client';
-import { Button, TextField, MenuItem, Select, InputLabel, FormControl, Stack, Box, Typography, OutlinedInput } from '@mui/material';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
+import { MenuItem, Select, InputLabel, FormControl, Stack, OutlinedInput } from '@mui/material';
 import withLayoutFull from '../../../libs/components/layout/LayoutFull';
-import { CREATE_NOTICE } from '../../../apollo/admin/mutation';
+import { CREATE_NOTICE, GET_NOTICE, UPDATE_NOTICE } from '../../../apollo/admin/mutation';
 import { NoticeInput } from '../../../libs/types/notice/notice.input';
 import { FAQCategory, NoticeCategory } from '../../../libs/enums/notice.enum';
 import { userVar } from '../../../apollo/store';
 import { sweetErrorHandling, sweetTopSmallSuccessAlert } from '../../../libs/sweetAlert';
 import { Message } from '../../../libs/enums/common.enum';
+import { useRouter } from 'next/router';
 
-const FaqCreate = () => {
+const FaqCreate = ({initialValues, ...props}:any) => {
     const user = useReactiveVar(userVar);
-    const [insertNoticeData, setInsertNoticeData] = useState<NoticeInput>({
-        noticeCategory: NoticeCategory.TERMS,
-        noticeTitle: '',
-        noticeContent: '', 
-        faqCategory: FAQCategory.PRODUCT,
-        noticeEventDate: '', 
-    });
+    const router = useRouter();
+    const [insertNoticeData, setInsertNoticeData] = useState<NoticeInput>(initialValues);
+
     const [createNotice] = useMutation(CREATE_NOTICE);
+    const [updateNotice] = useMutation(UPDATE_NOTICE);
+    const {
+		loading: getNoticeLoading,
+		data: getNoticeData,
+		error: getNoticeError,
+		refetch:getNoticeRefetch
+	} = useQuery(GET_NOTICE, {
+		fetchPolicy:'network-only',
+		variables:{ input: router.query.id},
+        skip:!router.query.id,
+	});
+
+    console.log('data', getNoticeData)
+    useEffect(() => {
+        setInsertNoticeData({
+            ...insertNoticeData,
+            noticeCategory: getNoticeData?.getNotice ?  getNoticeData?.getNotice?.noticeCategory : NoticeCategory.EVENT,
+            faqCategory: getNoticeData?.getNotice ?  getNoticeData?.getNotice?.faqCategory : FAQCategory.OTHER,
+            noticeTitle: getNoticeData?.getNotice ?  getNoticeData?.getNotice?.noticeTitle : '',
+            noticeContent: getNoticeData?.getNotice ?  getNoticeData?.getNotice?.noticeContent : '',
+            noticeEventDate: getNoticeData?.getNotice ? getNoticeData?.getNotice?.noticeEventDate : '',
+        })
+    }, [getNoticeLoading, getNoticeData]);
 
     const createFaqHandler = async () => {
         try {
@@ -32,29 +52,49 @@ const FaqCreate = () => {
             };
             await createNotice({ variables: { input: inputData } });
             setInsertNoticeData({
-                noticeCategory: NoticeCategory.TERMS,
+                noticeCategory: NoticeCategory.EVENT,
                 noticeTitle: '',
                 noticeContent: '', 
                 faqCategory: FAQCategory.PRODUCT,
                 noticeEventDate: '', 
             });
             await sweetTopSmallSuccessAlert('Done')
+            await router.back();
         } catch (err: any) {
             await sweetErrorHandling(err);
         }
     };
 
+    const updateNoticeHandler = useCallback(async () => {
+        try{
+            //@ts-ignore
+            insertNoticeData._id = getNoticeData?.getNotice?._id;
+            const result = await updateNotice({
+                variables: {
+                    input: insertNoticeData
+                }
+            });
+            await sweetTopSmallSuccessAlert('Done');
+            await router.push(`http://localhost:3000/_admin/cs/notice`);
+        }catch(err:any){
+			await sweetErrorHandling(err).then();
+		}
+    }, [insertNoticeData]);
+
+    if (getNoticeLoading) return <p>Loading...</p>;
+    if (getNoticeError) return <p>Error: {getNoticeError.message}</p>;
+    
     const noticeCategory = 'Category';
     const titleLabel = 
     insertNoticeData.noticeCategory === NoticeCategory.FAQ ? "Question" :
-    insertNoticeData.noticeCategory === NoticeCategory.TERMS ? "Notice Title" :
+    insertNoticeData.noticeCategory === NoticeCategory.TERMS ? "Title" :
     insertNoticeData.noticeCategory === NoticeCategory.EVENT ? "Event Title": 
     "Title";
 
     const contentLabel = 
         insertNoticeData.noticeCategory === NoticeCategory.FAQ ? 'Answer' :
         insertNoticeData.noticeCategory === NoticeCategory.EVENT ? "Input Event Date" :
-        insertNoticeData.noticeCategory === NoticeCategory.TERMS ? "Notice Content" : 
+        insertNoticeData.noticeCategory === NoticeCategory.TERMS ? "Content" : 
         "Content"; 
     return (
         <div style={{width:'100%', height:'1300px', background:'#a5a4a4', justifyItems:'center'}}>
@@ -68,8 +108,8 @@ const FaqCreate = () => {
                             setInsertNoticeData({ 
                                 ...insertNoticeData, 
                                 noticeCategory: value,
-                                noticeContent: value === NoticeCategory.EVENT ? '' : insertNoticeData.noticeContent, // Reset noticeContent if EVENT
-                                noticeEventDate: value === NoticeCategory.EVENT ? insertNoticeData.noticeEventDate : '', // Keep noticeEventDate as it is
+                                noticeContent: value === NoticeCategory.EVENT ? '' : insertNoticeData.noticeContent, 
+                                noticeEventDate: value === NoticeCategory.EVENT ? insertNoticeData.noticeEventDate : '',
                             });
                         }}
                     >
@@ -98,48 +138,68 @@ const FaqCreate = () => {
                         </Select>
                     </FormControl>
                 )}
-                 <InputLabel sx={{ color: 'white', marginLeft:'20px', marginBottom:'-5px', fontSize:'22px'}} shrink={true}>{titleLabel}</InputLabel>
+                 <InputLabel sx={{ color: 'white', marginLeft:'10px', marginBottom:'-5px', fontSize:'22px'}} shrink={true}>{titleLabel}</InputLabel>
                 <OutlinedInput
                     label={titleLabel}
                     onChange={({ target: { value } }: any) => {
                         setInsertNoticeData({ ...insertNoticeData, noticeTitle: value });
                     }}
-                    value={insertNoticeData.noticeTitle}
+                    value={insertNoticeData.noticeTitle }
                     sx={{ marginBottom: '25px', color:'black', background:'#a5a4a4', fontSize:'25px'}}
                    
                 />
-                 <InputLabel sx={{ color: 'white', marginLeft:'20px', marginBottom:'-5px', fontSize:'22px'}} shrink={true}>{contentLabel}</InputLabel>
+                 <InputLabel sx={{ color: 'white', marginLeft:'10px', marginBottom:'-5px', fontSize:'22px'}} shrink={true}>{contentLabel}</InputLabel>
                 <OutlinedInput
                     label={contentLabel}
                     onChange={({ target: { value } }: any) => {
                         if (insertNoticeData.noticeCategory === NoticeCategory.EVENT) {
                             setInsertNoticeData({ 
                                 ...insertNoticeData, 
-                                noticeEventDate: value}) // Update noticeEventDate
+                                noticeEventDate: value}) 
                         } else {
-                            setInsertNoticeData({ ...insertNoticeData, noticeContent: value }); // Update noticeContent
+                            setInsertNoticeData({ ...insertNoticeData, noticeContent: value }); 
                         }
                     }}
-                    value={insertNoticeData.noticeCategory === NoticeCategory.EVENT ? insertNoticeData.noticeEventDate : insertNoticeData.noticeContent} // Show noticeEventDate if EVENT
+                    value={insertNoticeData.noticeEventDate  ?  insertNoticeData.noticeEventDate : insertNoticeData.noticeContent}
                     sx={{ marginBottom: '25px', color:'black', background:'#a5a4a4', fontSize:'25px' }}
                 />
-                <Box className={'submit-btn'} component={'div'}>
-                <Button
-                    className={'submit-review'}
-                    disabled={
-                        insertNoticeData.noticeTitle === '' || 
-                        (insertNoticeData.noticeCategory === NoticeCategory.EVENT ? insertNoticeData.noticeEventDate === '' : insertNoticeData.noticeContent === '') || 
-                        user?._id === ''
-                    }
-                    onClick={createFaqHandler}
-                >
-                    <Typography className={'title'} sx={{ color: 'black',  border: '1px solid black', padding:'6px 40px', borderRadius:'6px', background:'#44a1ed'}}>ADD</Typography>
-                </Button>
-                </Box>
+
+                    <Stack >
+							{router.query.id ? (
+								<div style={{
+                                    width:'100px', height:'30px', 
+                                    background:'#1383d9', color:'white',
+                                    justifyItems:'center', alignContent:'center',
+                                    borderRadius:'5px',
+                                    cursor:'pointer'
+                                }} onClick={updateNoticeHandler}>
+									<p >Update</p>
+								</div>
+							) : (
+								<div style={{
+                                    width:'100px', height:'30px', 
+                                    background:'#1383d9', color:'white',
+                                    justifyItems:'center', alignContent:'center',
+                                    borderRadius:'5px',
+                                    cursor:'pointer'
+                                }} onClick={createFaqHandler}>
+									<p >Create</p>
+								</div>
+							)}
+					</Stack>
             </Stack>
         </div>
        
     );
 };
+FaqCreate.defaultProps ={
+    initialValues: {
+        noticeCategory: '',
+        noticeTitle: '',
+        noticeContent: '', 
+        faqCategory: '',
+        noticeEventDate: '',
+    }
+}
 
 export default withLayoutFull(FaqCreate);
