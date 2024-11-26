@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { useState } from 'react';
-import { useRouter, withRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { getJwtToken, logOut, updateUserInfo } from '../auth';
 import { Stack, Box } from '@mui/material';
@@ -13,12 +13,17 @@ import { CaretDown } from 'phosphor-react';
 import useDeviceDetect from '../hooks/useDeviceDetect';
 import Link from 'next/link';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
-import { useReactiveVar } from '@apollo/client';
+import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import { userVar } from '../../apollo/store';
 import { Logout } from '@mui/icons-material';
 import { REACT_APP_API_URL } from '../config';
+import { RippleBadge } from '../../scss/MaterialTheme/styled';
+import NotificationBadge from '../components/Notification'
+import { GET_USER_NOTIFICATIONS, UPDATE_NOTIFICATION } from '../../apollo/user/mutation';
+import { Notification } from '../types/notification/notification';
+import { NotificationUpdate } from '../types/notification/notification.update';
 
-const Top = () => {
+const Top = ({ initialInput, ...props }: any) => {
     const device = useDeviceDetect();
 	const user = useReactiveVar(userVar);
 	const { t, i18n } = useTranslation('common');
@@ -32,8 +37,27 @@ const Top = () => {
 	const [bgColor, setBgColor] = useState<boolean>(false);
 	const [logoutAnchor, setLogoutAnchor] = React.useState<null | HTMLElement>(null);
 	const logoutOpen = Boolean(logoutAnchor);
+	const [notification, setNotification] = useState<Notification[]>([]);
+	const [total, setTotal] = useState<number>(0);
+	const [showNotifications, setShowNotifications] = useState(false);
 
-
+	const [updateNotification] = useMutation(UPDATE_NOTIFICATION);
+	const { 
+		loading:getNotificationsLoading,
+		data:getNotificationsData, 
+		error:getNotificationsError, 
+		refetch:getNotificationsRefetch
+	} = useQuery(GET_USER_NOTIFICATIONS, {
+		skip: !user?._id,
+		fetchPolicy:"network-only",
+		variables:{input: initialInput},
+		notifyOnNetworkStatusChange:true,
+		onCompleted:(data) => {
+			setNotification(data?.getUserNotifications?.list);
+			setTotal(data?.getUserNotifications?.metaCounter[0]?.total);
+		},	
+	});
+	
     	/** LIFECYCLES **/
 	useEffect(() => {
 		if (localStorage.getItem('locale') === null) {
@@ -97,6 +121,25 @@ const Top = () => {
 			setAnchorEl(null);
 		}
 	};
+
+	const updateNotificationHandler = async( input:NotificationUpdate) =>{
+		try {
+			await updateNotification({
+				variables: {input:input}
+			})
+			await getNotificationsRefetch();
+		}catch(err){
+			   console.log('updateNotificationHandler',err)
+		}
+	}
+	   
+	const toggleNotifications = () => {
+	   setShowNotifications((prev) => !prev);
+	};
+	const combinedNotifications = notification.map(ele => ({
+		id: ele._id,
+		title: ele.notificationTitle
+	}));
 
 	const StyledMenu = styled((props: MenuProps) => (
 		<Menu
@@ -232,7 +275,13 @@ const Top = () => {
 							)}
 
 							<div className={'lan-box'}>
-								{user?._id && <NotificationsOutlinedIcon className={'notification-icon'} />}
+								<div className={'notificationBox'} onClick={toggleNotifications}>
+									<NotificationsOutlinedIcon className={'notification-icon'} sx={{ width: "40px", height: "40px" }} />
+									<RippleBadge style={{ margin: '-55px 30px 0px 0px',cursor:'pointer'}} badgeContent={total} />
+								</div>
+								{showNotifications && (
+									<NotificationBadge notifications={combinedNotifications} onClose={toggleNotifications} updateNotificationHandler={updateNotificationHandler}/>
+								)}
 								<Button
 									disableRipple
 									className="btn-lang"
@@ -286,6 +335,17 @@ const Top = () => {
 				</Stack>
 			</Stack>
 		);
-};
+	};
 }
-export default Top;  // export default Top;
+
+Top.defaultProps = {
+	initialInput:{
+		page:1,
+		limit:15,
+		search:{
+			notificationStatus:"WAIT"
+		}
+	}
+}
+
+export default Top;  

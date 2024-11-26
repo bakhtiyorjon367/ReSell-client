@@ -59,7 +59,7 @@ const likeProductHandler = async(user:T, id:string) => {
             <Stack className={"container"}>
                 <Stack className={"info-box"}>
                     <Box className={"left"}>
-                        <span>{t('PopularProducts')}</span>
+                        <span>{t('Popular products')}</span>
                     </Box>
                     <Box className={"right"}>
                         <div className={"pagination-box"}>

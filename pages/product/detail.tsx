@@ -30,6 +30,7 @@ import { T } from '../../libs/types/common';
 import { sweetErrorHandling, sweetMixinErrorAlert, sweetTopSmallSuccessAlert, sweetTopSuccessAlert } from '../../libs/sweetAlert';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { ProductStatus } from '../../libs/enums/product.enum';
 
 SwiperCore.use([Autoplay, Navigation, Pagination]);
 
@@ -267,7 +268,11 @@ const ProductDetail: NextPage = ({ initialComment, ...props }: any) => {
 										{product?.productSharing ? 
 											<p className='share' style={{color:'green', marginTop:'5px', fontSize:'20px'}}>Sharing</p> 
 										: 
-											<p className='price'>{product?.productPrice},000</p>
+											<Box>
+												<p style={{color:"#877e03", marginTop:'10px',marginBottom:'-25px'}}>{product?.productStatus === ProductStatus.SOLD ? 'SOLD':''} </p>
+												<p className='price'>{product?.productPrice},000</p>
+											</Box>
+											
 										} 
 										<Stack className={'statistics'}>
 											<Stack className="buttons">

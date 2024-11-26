@@ -143,8 +143,8 @@ body::-webkit-scrollbar {
 						 }
 						 .login-user{
 							 img{
-								 width: 72px;
-								 height: 72px;
+								 width: 62px;
+								 height: 62px;
 								 border-radius: 50%;
 								 object-fit: cover;
 							 }
@@ -156,6 +156,8 @@ body::-webkit-scrollbar {
 						align-items: center;
 						.notification-icon {
 							color: white;
+							cursor: pointer;
+							margin-right: 5px;
 						}
 						.btn-lang {
 							border-radius: 4px;
@@ -165,6 +167,42 @@ body::-webkit-scrollbar {
 								border-radius: 2px;
 							}
 						}
+						.notificationContainer {
+							width: 400px;
+							height: 600px;
+							background-color: #fff;
+							border: 1px solid #ccc;
+							border-radius: 8px;
+							box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+							padding: 20px;
+							position: absolute; // Position absolute for overlay effect
+							right: 20px; // Position it to the right of the box
+							top: 70px; // Adjust as needed to position below the icon
+							z-index: 1000; // Ensure it appears above other elements
+							overflow-y: auto; // Allow scrolling if content overflows
+						
+							.closeButton {
+								background: none;
+								border: none;
+								cursor: pointer;
+								position: absolute;
+								right: 10px; // Adjust as needed
+								top: 10px; // Adjust as needed
+								font-size: 16px; // Adjust size as needed
+								color: #333; // Adjust color as needed
+							}
+						
+							.notificationBox {
+								background-color: #e7f3ff;
+								border: 1px solid #b3d7ff;
+								border-radius: 4px;
+								padding: 10px;
+								margin: 10px 0;
+								text-decoration: underline;
+								cursor: pointer;
+							}
+						}
+						
 						.img-flag {
 							width: 24px;
 							height: 17px;

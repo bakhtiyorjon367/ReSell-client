@@ -196,7 +196,7 @@ const CommunityArticleList = (props: CommunityArticleListProps) => {
 												<DeleteIcon fontSize="small" />
 											</Button>
 										) : (
-											<>
+											<div>
 												<Button onClick={(e: any) => menuIconClickHandler(e, index)} className={'badge success'}>
 													{article.articleStatus}
 												</Button>
@@ -225,7 +225,7 @@ const CommunityArticleList = (props: CommunityArticleListProps) => {
 															</MenuItem>
 														))}
 												</Menu>
-											</>
+											</div>
 										)}
 									</TableCell>
 								</TableRow>

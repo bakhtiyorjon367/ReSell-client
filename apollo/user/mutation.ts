@@ -334,3 +334,69 @@ export const UNSUBSCRIBE = gql`
 		}
 	}
 `;
+
+/**************************
+ *         NOTIFICATION        *
+ *************************/
+
+export const UPDATE_NOTIFICATION = gql`
+	mutation UpdateNotification($input:NotificationUpdate!) {
+    updateNotification(input: $input) {
+        _id
+        notificationType
+        notificationStatus
+        notificationGroup
+        notificationTitle
+        notificationDesc
+        authorId
+        receiverId
+        productId
+        articleId
+        createdAt
+        updatedAt
+    }
+}
+
+`;
+
+export const GET_USER_NOTIFICATIONS = gql`
+query GetUserNotifications ($input:NotificationsInquiry!){
+    getUserNotifications(input: $input) {
+        list {
+            _id
+            notificationType
+            notificationStatus
+            notificationGroup
+            notificationTitle
+            notificationDesc
+            authorId
+            receiverId
+            productId
+            articleId
+            createdAt
+            updatedAt
+        }
+        metaCounter {
+            total
+        }
+    }
+}
+`;
+export const REMOVE_NOTIFICATION = gql`
+	mutation RemoveNotification ($input:String!){
+		removeNotification(notificationId: $input) {
+			_id
+			notificationType
+			notificationStatus
+			notificationGroup
+			notificationTitle
+			notificationDesc
+			authorId
+			receiverId
+			productId
+			articleId
+			createdAt
+			updatedAt
+		}
+	}
+`;

@@ -130,16 +130,13 @@ const TuiEditor = () => {
 							displayEmpty
 							inputProps={{ 'aria-label': 'Without label' }}
 						>
-							<MenuItem value={BoardArticleCategory.FREE}>
+							<MenuItem key = {0} value={BoardArticleCategory.FREE}>
 								<span>Free</span>
 							</MenuItem>
-							<MenuItem value={BoardArticleCategory.COMMON}>Common</MenuItem>
-							<MenuItem value={BoardArticleCategory.FREE}>Free</MenuItem>
-							<MenuItem value={BoardArticleCategory.RECOMMEND}>Recommendation</MenuItem>
-							<MenuItem value={BoardArticleCategory.HOBBY}>Hobby</MenuItem>
-							<MenuItem value={BoardArticleCategory.QUESTION}>Question?</MenuItem>
-							<MenuItem value={BoardArticleCategory.WORKOUT}>Workout</MenuItem>
-							<MenuItem value={BoardArticleCategory.PARTTIME}>Part-time</MenuItem>
+							
+							<MenuItem key = {2} value={BoardArticleCategory.RECOMMEND}>Recommendation</MenuItem>
+							<MenuItem key = {3} value={BoardArticleCategory.HOBBY}>Hobby</MenuItem>
+							<MenuItem key = {4} value={BoardArticleCategory.QUESTION}>Question?</MenuItem>
 						</Select>
 					</FormControl>
 				</Box>
