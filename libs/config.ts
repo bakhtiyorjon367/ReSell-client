@@ -2,14 +2,6 @@ export const REACT_APP_API_URL = `${process.env.REACT_APP_API_URL}`;
 
 export const availableOptions = ['productBarter', 'productSharing'];
 
-const thisYear = new Date().getFullYear();
-
-export const productYears: any = [];
-
-for (let i = 1970; i <= thisYear; i++) {
-	productYears.push(String(i));
-}
-
 export const Messages = {
 	error1: 'Something went wrong!',
 	error2: 'Please login first!',
@@ -18,4 +10,3 @@ export const Messages = {
 	error5: 'Only images with jpeg, jpg, png format allowed!',
 };
 
-const topProductRank = 50;

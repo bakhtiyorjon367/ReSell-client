@@ -7,7 +7,7 @@ import { REACT_APP_API_URL } from '../../config';
 import { ProductInput } from '../../types/product/product.input';
 import axios from 'axios';
 import { getJwtToken } from '../../auth';
-import { sweetConfirmAlert, sweetErrorHandling, sweetMixinErrorAlert, sweetMixinSuccessAlert } from '../../sweetAlert';
+import { sweetErrorHandling, sweetMixinErrorAlert, sweetMixinSuccessAlert } from '../../sweetAlert';
 import { userVar } from '../../../apollo/store';
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import { CREATE_PRODUCT, UPDATE_PRODUCT } from '../../../apollo/user/mutation';
@@ -23,7 +23,6 @@ const AddProduct = ({ initialValues, ...props }: any) => {
 	const token = getJwtToken();
 	const user = useReactiveVar(userVar);
 
-	// let getProductData: any, getProductLoading: any;
 	/** APOLLO REQUESTS **/
 	const [updateProduct] = useMutation(UPDATE_PRODUCT);
 	const [createProduct] = useMutation(CREATE_PRODUCT);

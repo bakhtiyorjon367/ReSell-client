@@ -78,13 +78,13 @@ export const Search = () => {
                 }
                 sx={{
                     '& .MuiOutlinedInput-notchedOutline': {
-                        borderColor: 'transparent', // Set the default border color to transparent
+                        borderColor: 'transparent',
                     },
                     '&:hover .MuiOutlinedInput-notchedOutline': {
-                        borderColor: 'transparent', // Set hover border color to transparent
+                        borderColor: 'transparent',
                     },
                     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                        borderColor: 'transparent', // Set focused border color to transparent
+                        borderColor: 'transparent', 
                     },
                 }}
             />

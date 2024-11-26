@@ -9,7 +9,7 @@ import axios from 'axios';
 import { T } from '../../types/common';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Message } from '../../enums/common.enum';
-import { sweetErrorHandling, sweetTopSuccessAlert } from '../../sweetAlert';
+import { sweetErrorHandling } from '../../sweetAlert';
 import { useMutation } from '@apollo/client';
 import { CREATE_BOARD_ARTICLE } from '../../../apollo/user/mutation';
 
