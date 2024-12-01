@@ -276,7 +276,7 @@ const Top = ({ initialInput, ...props }: any) => {
 
 							<div className={'lan-box'}>
 								<div className={'notificationBox'} onClick={toggleNotifications}>
-									<NotificationsOutlinedIcon className={'notification-icon'} sx={{ width: "40px", height: "40px" }} />
+									<NotificationsOutlinedIcon className={'notification-icon'} sx={{ width: "40px", height: "40px", marginTop:'10px'}} />
 									<RippleBadge style={{ margin: '-55px 30px 0px 0px',cursor:'pointer'}} badgeContent={total} />
 								</div>
 								{showNotifications && (

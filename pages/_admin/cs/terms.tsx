@@ -79,7 +79,7 @@ const AdminNotice: NextPage = ({initialInquiry, ...props}: any) => {
 		setValue(newValue);
 
 		setNoticeInquiry({ ...noticeInquiry, page: 1, sort: 'createdAt' });
-		let noticeCategory;
+		let noticeCategory:NoticeCategory;
 		switch (newValue) {
 			case 'HOLD':
 				setNoticeInquiry({ ...noticeInquiry, search: { noticeStatus: NoticeStatus.HOLD } });

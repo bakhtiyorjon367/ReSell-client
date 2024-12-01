@@ -1,0 +1,29 @@
+version: "3.3"
+
+services:
+  resell-client:
+    container_name: resell-client
+    restart: always
+    image: node:20.10.0
+    ports:
+      - 4000:3000
+    environment:
+      - PORT=3000
+
+    volumes:
+      - ./:/usr/src/resell-client
+    working_dir: /usr/src/resell-client
+
+    networks:
+      - client-network
+
+    command: bash -c "yarn && yarn run build && yarn run start"
+
+networks:
+  client-network:
+    driver: bridge
+
+
+#resell-next localhost  4000 -> container: 3000
+#resell-api localhost   4001 -> container: 3010
+#resell-batch localhost 4002 -> container: 3011
