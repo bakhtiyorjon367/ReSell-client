@@ -11,11 +11,12 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { BoardArticlesInquiry } from '../../libs/types/board-article/board-article.input';
 import { BoardArticleCategory } from '../../libs/enums/board-article.enum';
 import withLayoutFull from '../../libs/components/layout/LayoutFull';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import { LIKE_TARGET_BOARD_ARTICLE } from '../../apollo/user/mutation';
 import { GET_BOARD_ARTICLES } from '../../apollo/user/query';
 import { Messages } from '../../libs/config';
 import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../libs/sweetAlert';
+import { userVar } from '../../apollo/store';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -24,6 +25,7 @@ export const getStaticProps = async ({ locale }: any) => ({
 });
 
 const Community: NextPage = ({ initialInput, ...props }: T) => {
+	const user = useReactiveVar(userVar);
 	const device = useDeviceDetect();
 	const router = useRouter();
 	const { query } = router;
@@ -117,18 +119,7 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 								<Stack className="panel-config">
 									<Stack className="title-box">
 										<Stack className="left">
-											{/* <Typography className="title">{searchCommunity.search.articleCategory} BOARD</Typography>
-											<Typography className="sub-title">
-												Express your opinions freely here without content restrictions
-											</Typography> */}
 											<Stack className="left-config">
-												{/* <Stack className={'image-info'}>
-													<img src={'/img/logo/favicon.svg'} />
-													<Stack className={'community-name'}>
-														<Typography className={'name'}>Blogs</Typography>
-													</Stack>
-												</Stack> */}
-
 												<TabList
 													orientation="horizontal"
 													aria-label="lab API tabs example"
@@ -158,6 +149,7 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 														className={`tab-button ${searchCommunity.search.articleCategory == 'QUESTION' ? 'active' : ''}`}
 													/>
 												</TabList>
+											{user._id && 	
 												<Button
 													onClick={() =>
 														router.push({
@@ -171,21 +163,9 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 												>
 													Write
 												</Button>
+											}
 											</Stack>
 										</Stack>
-										{/* <Button
-											onClick={() =>
-												router.push({
-													pathname: '/mypage',
-													query: {
-														category: 'writeArticle',
-													},
-												})
-											}
-											className="right"
-										>
-											Write
-										</Button> */}
 									</Stack>
 
 									<TabPanel value="FREE">
@@ -244,6 +224,20 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 											)}
 										</Stack>
 									</TabPanel>
+									<TabPanel value="QUESTION">
+										<Stack className="list-box">
+											{totalCount ? (
+												boardArticles?.map((boardArticle: BoardArticle) => {
+													return <CommunityCard boardArticle={boardArticle} key={boardArticle?._id} likeArticleHandler={likeArticleHandler}/>;
+												})
+											) : (
+												<Stack className={'no-data'}>
+													<img src="/img/icons/icoAlert.svg" alt="" />
+													<p>No Article found!</p>
+												</Stack>
+											)}
+										</Stack>
+									</TabPanel>
 								</Stack>
 							</Stack>
 						</Stack>
@@ -278,7 +272,7 @@ Community.defaultProps = {
 		page: 1,
 		limit: 6,
 		sort: 'createdAt',
-		direction: 'ASC',
+		direction: 'DESC',
 		search: {
 			articleCategory: 'FREE',
 		},

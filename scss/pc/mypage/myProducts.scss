@@ -168,7 +168,7 @@
 						height: 100%;
 						align-items: center;
 						justify-content: center;
-						margin-right: 30px;
+						margin-right: 50px;
 						.date {
 							color: #181a20;
 							font-family: $font;
@@ -184,8 +184,11 @@
 						align-items: center;
 						justify-content: center;
 						margin-right: 65px;
+						padding: 35px;
+						cursor: pointer;
 						.coloured-box {
-							width: 93px;
+							width: fit-content;
+							min-width: 93px;
 							height: 36px;
 							align-items: center;
 							justify-content: center;

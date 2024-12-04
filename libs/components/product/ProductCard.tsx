@@ -72,9 +72,9 @@ const ProductCard = (props: ProductCardType) =>{
 								<Typography className="view-cnt">Views { product?.productViews}</Typography>
 								<IconButton color={'success'} onClick={() => likeProductHandler(user, product?._id)}>
 									{myFavorites ? (
-										<FavoriteIcon color="primary" />
+										<FavoriteIcon color="primary" fontSize="small"/>
 									) : product?.meLiked && product?.meLiked[0]?.myFavorite ? (
-										<FavoriteIcon color="primary" />
+										<FavoriteIcon color="primary" fontSize="small"/>
 									) : (
 										<FavoriteBorderIcon />
 									)}
