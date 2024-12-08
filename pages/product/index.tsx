@@ -44,7 +44,7 @@ const ProductList: NextPage = ({ initialInput, ...props }: any) => {
 		error:getProductsError, 
 		refetch:getProductsRefetch
 	} = useQuery(GET_PRODUCTS, {
-		fetchPolicy:"network-only",
+		fetchPolicy:"cache-and-network",
 		variables:{input: searchFilter},
 		notifyOnNetworkStatusChange:true,
 		onCompleted:(data:T) => {

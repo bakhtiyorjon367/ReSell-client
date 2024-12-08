@@ -73,7 +73,7 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 		refetch:boardArticleRefetch
 	}= useQuery
 		(GET_BOARD_ARTICLE, {
-			fetchPolicy:'network-only',
+			fetchPolicy:'cache-and-network',
 			variables: {
 				input: articleId,
 			},

@@ -1,5 +1,3 @@
-version: "3.3"
-
 services:
   resell-client:
     container_name: resell-client
@@ -9,6 +7,7 @@ services:
       - 4000:3000
     environment:
       - PORT=3000
+      - TZ=Asia/Seoul
 
     volumes:
       - ./:/usr/src/resell-client

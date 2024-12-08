@@ -20,7 +20,7 @@ const Notice = ({initialInquiry, ...props}:any) => {
 		error: getNoticesError,
 		refetch:getNoticesRefetch
 	} = useQuery(GET_NOTICES, {
-		fetchPolicy:'network-only',
+		fetchPolicy:'cache-and-network',
 		variables:{ input: noticeInquiry },
 		notifyOnNetworkStatusChange:true,
 		onCompleted:(data:T) => {
