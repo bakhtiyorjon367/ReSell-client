@@ -48,6 +48,9 @@ const CommunityCard = (props: CommunityCardProps) => {
 	} else {
 		return (
 			<Stack className="community-general-card-config">
+				<Stack className="image-box">
+					<img src={imagePath} alt="" className="card-img" onClick={(e) => chooseArticleHandler(e, boardArticle)}/>
+				</Stack>
 				<Stack className="desc-box">
 					<Stack>
 						<Typography
@@ -65,11 +68,8 @@ const CommunityCard = (props: CommunityCardProps) => {
 							</Moment>
 							<Moment className="day" format={'DD'}>{boardArticle?.createdAt}</Moment>
 						</Stack>
+						<Stack className='content' onClick={(e) => chooseArticleHandler(e, boardArticle)}>{boardArticle?.articleTitle}</Stack>
 					</Stack>
-					<Stack className='content' onClick={(e) => chooseArticleHandler(e, boardArticle)}>{boardArticle?.articleTitle}</Stack>
-				</Stack>
-				<Stack className="image-box">
-					<img src={imagePath} alt="" className="card-img" onClick={(e) => chooseArticleHandler(e, boardArticle)}/>
 					<Stack className={'buttons'}>
 						<IconButton color={'default'} >
 							<RemoveRedEyeIcon />
@@ -84,6 +84,7 @@ const CommunityCard = (props: CommunityCardProps) => {
 						</IconButton>
 						<Typography className="view-cnt">{boardArticle?.articleLikes}</Typography>
 					</Stack>
+					
 				</Stack>
 			</Stack>
 		);

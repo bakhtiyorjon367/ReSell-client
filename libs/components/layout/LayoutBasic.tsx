@@ -15,9 +15,6 @@ const withLayoutBasic =(Component:any)=>{
                       <Stack id={"top"}><Top/></Stack>
                     <Stack 
                         className={"header-basic"}
-                        style={{
-                            boxShadow: "inset 10px 40px 150px 40px rgba(24 22 36)",
-                        }}
                     >
                         <Stack className="container">
                             <Search/>

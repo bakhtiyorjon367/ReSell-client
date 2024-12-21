@@ -1,6 +1,6 @@
 import React, { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
 import { NextPage } from 'next';
-import { Box, Button, Menu, MenuItem, Pagination, Stack, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Menu, MenuItem, Pagination, Stack, Typography } from '@mui/material';
 import ProductCard from '../../libs/components/product/ProductCard';
 import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
@@ -122,7 +122,13 @@ const ProductList: NextPage = ({ initialInput, ...props }: any) => {
 		setSortingOpen(false);
 		setAnchorEl(null);
 	};
-
+	if(getProductsLoading){
+		return (
+			<Stack sx={{display:'flex', justifyContent:'center', alignItems:'center', width:'100%', height:'1080px'}}>
+				<CircularProgress size={'4rem'}/>
+			</Stack>
+		);
+	}
 	if (device === 'mobile') {
 		return <h1>Products MOBILE</h1>;
 	} else {

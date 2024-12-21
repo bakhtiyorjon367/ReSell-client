@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { Box, Button, CircularProgress, Stack, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Divider, Stack, Typography } from '@mui/material';
 import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutFull from '../../libs/components/layout/LayoutFull';
 import { NextPage } from 'next';
@@ -7,8 +7,6 @@ import Review from '../../libs/components/product/Review';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper';
 import ProductBigCard from '../../libs/components/common/ProductBigCard';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import WestIcon from '@mui/icons-material/West';
 import EastIcon from '@mui/icons-material/East';
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
@@ -31,6 +29,7 @@ import { sweetErrorHandling, sweetMixinErrorAlert } from '../../libs/sweetAlert'
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { ProductStatus } from '../../libs/enums/product.enum';
+import { Columns } from 'phosphor-react';
 
 SwiperCore.use([Autoplay, Navigation, Pagination]);
 
@@ -205,52 +204,72 @@ const ProductDetail: NextPage = ({ initialComment, ...props }: any) => {
 				<div className={'container'}>
 					<Stack className={'product-detail-config'}>
 						<Stack className={'product-info-config'}>
-							<Stack className={'info'}>
-								<Stack className={'left-box'}>
-									<Typography className={'title-main'}>{product?.productTitle}</Typography>
-									<Stack className={'top-box'}>
-										<Typography className={'city'}>{product?.productLocation}</Typography>
-										<Stack className={'divider'}></Stack>
-										<Typography className={'date'}>{moment().diff(product?.createdAt, 'days')} days ago</Typography>
-									</Stack>
-								</Stack>
-								<Stack className={'right-box'}>
-									{product?.meLiked && product?.meLiked[0]?.myFavorite ? (
-										<FavoriteIcon color='primary' fontSize={'medium'} />
-									) : (
-										<FavoriteBorderIcon
-											color='secondary'
-											fontSize={'medium'}
-											// @ts-ignore
-											onClick={() => likeProductHandler(user, product?._id)}
-										/>
-									)}
-								</Stack>
-							</Stack>
+							<Stack className={'info'}>{`Home > Shop Local > ${product?.productTitle}`}</Stack>
 							<Stack className={'images'}>
 								<Stack className={'main-image'}>
 									<img
 										src={slideImage ? `${REACT_APP_API_URL}/${slideImage}` : '/img/product/defaultDetailImage.webp'}
 										alt={'main-image'}
 									/>
-								</Stack>
-								<Stack className={'image-info'}>
-										<Link href={`/member?memberId=${product?.memberData?._id}`}>
-											<img
-												className={'member-image'}
-												src={
-													product?.memberData?.memberImage
-														? `${REACT_APP_API_URL}/${product?.memberData?.memberImage}`
-														: '/img/profile/defaultUser.svg'
-												}
-											/>
-										</Link>
-										<Stack className={'name-phone-listings'}>
+									<Stack className={'image-info'}>
+										<Box className='member-info'>
 											<Link href={`/member?memberId=${product?.memberData?._id}`}>
-												<Typography className={'name'}>{product?.memberData?.memberNick}</Typography>
+												<img
+													className={'member-image'}
+													src={
+														product?.memberData?.memberImage
+															? `${REACT_APP_API_URL}/${product?.memberData?.memberImage}`
+															: '/img/profile/defaultUser.svg'
+													}
+												/>
 											</Link>
-											<Stack className={'phone-number'}>
-												<Typography className={'number'}>{product?.memberData?.memberPhone}</Typography>
+											<Stack className={'name-phone-listings'}>
+												<Link href={`/member?memberId=${product?.memberData?._id}`}>
+													<Typography className={'name'}>{product?.memberData?.memberNick}</Typography>
+												</Link>
+												<Stack className={'phone-number'}>
+													<Typography className={'number'}>{product?.memberData?.memberPhone}</Typography>
+												</Stack>
+											</Stack>
+										</Box>
+										<Box className={'ranking'}>Ranking {product?.memberData?.memberRank}</Box>
+									</Stack>
+									
+								</Stack>
+								<Stack className={'top'}>
+										<Typography sx={{font:'10px', letterSpacing:'1px'}}>Product Description</Typography>
+										<Typography className={'title'}>{product?.productTitle ?? ''}</Typography>
+										<Box sx={{display:'flex', flexDirection:'row'}}>
+											<Typography className={'category'}>{product?.productCategory}</Typography>
+											<Typography className={'date'}>{moment().diff(product?.createdAt, 'days')} days ago</Typography>
+										</Box>
+										{product?.productSharing ? 
+											<p className='share' style={{color:'#28e207', marginTop:'10px', fontSize:'25px'}}>Sharing</p> 
+										: 
+											<Box>
+												{product?.productStatus === ProductStatus.SOLD ?
+												 	<p style={{color:"#eacf00", marginTop:'10px', fontSize:'25px'}}> SOLD</p> 
+												 : product?.productStatus === ProductStatus.RESERVED ? 
+												 	<p style={{color:"#28e207", marginTop:'10px',fontSize:'25px'}}> RESERVED</p> : ''
+												}
+												<p className='price'>{product?.productPrice},000</p>
+											</Box>
+											
+										} 
+										<Typography className={'desc'}>{product?.productDesc ?? 'No Description!'}</Typography>
+										<Typography className={'location'}>Location : {product?.productLocation} </Typography>
+										<Stack className={'statistics'}>
+											<Stack className="buttons">
+												<Stack className="button-box">
+													<div>Viewed</div>
+													<Typography>{product?.productViews}</Typography>
+												</Stack>
+												<Stack className="button-box">
+													<div 
+													// @ts-ignore
+													onClick={() => likeProductHandler(user, product?._id)}>Liked</div>
+													<Typography>{product?.productLikes}</Typography>
+												</Stack>
 											</Stack>
 										</Stack>
 								</Stack>
@@ -259,36 +278,6 @@ const ProductDetail: NextPage = ({ initialComment, ...props }: any) => {
 						</Stack>
 						<Stack className={'product-desc-config'}>
 							<Stack className={'left-config'}>
-								<Stack className={'prop-desc-config'}>
-									<Stack className={'top'}>
-										<Typography className={'title'}>Product Description</Typography>
-										<Typography className={'desc'}>{product?.productTitle ?? ''}</Typography>
-										<Typography className={'desc'}>{product?.productDesc ?? 'No Description!'}</Typography>
-										<Typography className={'category'}>{product?.productCategory}</Typography>
-										{product?.productSharing ? 
-											<p className='share' style={{color:'green', marginTop:'5px', fontSize:'20px'}}>Sharing</p> 
-										: 
-											<Box>
-												<p style={{color:"#877e03", marginTop:'10px',marginBottom:'-25px'}}>{product?.productStatus === ProductStatus.SOLD ? 'SOLD':''} </p>
-												<p className='price'>{product?.productPrice},000</p>
-											</Box>
-											
-										} 
-										<Stack className={'statistics'}>
-											<Stack className="buttons">
-												<Stack className="button-box">
-													<div>Viewed</div>
-													<Typography>{product?.productViews}</Typography>
-												</Stack>
-												<Stack className="button-box">
-													<div>Liked</div>
-													<Typography>{product?.productLikes}</Typography>
-												</Stack>
-											</Stack>
-										</Stack>
-									</Stack>
-									<div className='divider'></div>
-								</Stack>
 								<Stack className={'address-config'}>
 									<Box className={'dealing'}>
 										<Typography className={'title'}>Dealing address</Typography>

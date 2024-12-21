@@ -13,72 +13,20 @@
 				width: 100%;
 				height: auto;
 				.info {
-					width: 100%;
-					height: auto;
-					flex-direction: row;
-					justify-content: space-between;
-					.left-box {
-						width: 50%;
-						height: auto;
-						.title-main {
-							color: #fff;
-							font-family: $font;
-							font-size: 30px;
-							font-style: normal;
-							font-weight: 400;
-							line-height: normal;
-							letter-spacing: 0.6px;
-							text-transform: capitalize;
-						}
-						.top-box {
-							width: auto;
-							height: auto;
-							flex-direction: row;
-							align-items: center;
-							gap: 10px;
-							margin-bottom: 17px;
-							.city {
-								color: #dad4d4;
-								font-family: $font;
-								font-size: 13px;
-								font-style: normal;
-								font-weight: 400;
-								line-height: normal;
-							}
-							.divider {
-								margin-top: 1px;
-								width: 1px;
-								height: 15px;
-								background: #dad4d4;
-							}
-							
-							.date {
-								color: #dad4d4;
-								font-family: $font;
-								font-size: 15px;
-								font-style: normal;
-								font-weight: 400;
-								line-height: 28px;
-							}
-						}
-						
-					}
-					.right-box {
-						margin-right: 20px;
-						margin-top: 20px;
-						svg {
-							width: 50px;
-							height: 40px;
-							cursor: pointer;
-						}
-					}
+					margin-top: 20px;
+					color:#e0e0e2;
+					font-size: 24px;
+					line-height: 1.5;
+					margin-bottom: 20px;
 				}
 				.images {
 					width: 100%;
 					height: 1000px;
 					gap: 10px;
+					display: flex;
+					flex-direction: row;
 					.main-image {
-						width: 100%;
+						width: 60%;
 						height: 800px;
 						img {
 							width: 100%;
@@ -87,50 +35,158 @@
 							border-radius: 12px;
 						}
 					}
+					.top {
+						width: 40%;
+						height: auto;
+						margin-left: 50px;
+						.title {
+							color: #ffffff;
+							font-family: $font;
+							font-size: 50px;
+							font-style: normal;
+							font-weight: 500;
+							line-height: normal;
+						}
+						.category{
+							margin-top: 10px;
+							margin-right: 10px;
+							color: #a6a5a5;
+							font-family: $font;
+							font-size: 23px;
+							text-decoration: underline;
+							cursor: pointer;
+						}
+						.date{
+							margin-top: 10px;
+							color:#a6a5a5;
+							font-family: $font;
+							font-size: 23px;
+						}
+						.price {
+							margin-top: 80px;
+							color: #ffffff;
+							font-family: $font;
+							font-size: 40px;
+							font-style: normal;
+							font-weight: 400;
+							line-height: 35px;
+						}
+						.desc {
+							margin-top: 40px;
+							line-height: normal;
+							color: #ffffff;
+							font-family: $font;
+							font-size: 40px;
+							font-style: normal;
+						}
+						.location{
+							margin-top: 40px;
+							margin-bottom: 20px;
+							color: #e9e8e8;
+							font-family: $font;
+							font-size: 30px;
+							font-style: normal;
+							font-weight: 400;
+							line-height: 26px;
+
+						}
+					    .statistics {
+							.buttons {
+								width: auto;
+								height: auto;
+								flex-direction: row;
+								align-items: center;
+								gap: 15px;
+								margin: 30px 20px 27px 0;
+								p {
+									color: #ececec;
+									text-align: right;
+									font-family: $font;
+									font-size: 22px;
+									font-style: normal;
+									font-weight: 400;
+									line-height: normal;
+									letter-spacing: 0.52px;
+									text-transform: capitalize;
+								}
+								.button-box {
+									flex-direction: row;
+									gap: 5px;
+									align-items: center;
+									cursor: pointer;
+									div{
+										color: #b5b4b4;
+										text-align: right;
+										font-family: $font;
+										font-size: 22px;
+										font-style: normal;
+										font-weight: 400;
+										line-height: normal;
+										letter-spacing: 0.82px;
+										text-transform: capitalize;
+									}
+								}
+							}
+						}
+
+					}
 					.image-info {
 						width: 100%;
 						flex-direction: row;
-						gap: 18px;
+						justify-content: space-between;
 						margin-top: 25px;
-						img {
-							width: 95px;
-							height: 95px;
-							border-radius: 50%;
-							object-fit: cover;
-						}
-						.name-phone-listings {
-							gap: 5px;
-							.name {
-								color: #dfe0e4;
-								font-family: $font;
-								font-size: 25px;
-								font-style: normal;
-								font-weight: 600;
-								line-height: normal;
+						.member-info{
+							display: flex;
+							flex-direction: row;
+							gap:20px;
+							img {
+								width: 95px;
+								height: 95px;
+								border-radius: 50%;
+								object-fit: cover;
 							}
-							.phone-number {
-								width: 100%;
-								flex-direction: row;
-								align-items: center;
-								gap: 10px;
-								.number {
-									color: #d7d9df;
+							.name-phone-listings {
+								gap: 5px;
+								.name {
+									color: #ffffff;
+									font-family: $font;
+									font-size: 30px;
+									font-style: normal;
+									font-weight: 600;
+									line-height: normal;
+								}
+								.phone-number {
+									width: 100%;
+									flex-direction: row;
+									align-items: center;
+									gap: 10px;
+									.number {
+										color: #d7d9df;
+										font-family: $font;
+										font-size: 24px;
+										font-style: normal;
+										font-weight: 400;
+										line-height: 28px;
+									}
+								}
+								.listings {
+									color: #cacbcd;
 									font-family: $font;
 									font-size: 20px;
 									font-style: normal;
 									font-weight: 400;
-									line-height: 28px;
+									line-height: normal;
+									text-decoration-line: underline;
 								}
 							}
-							.listings {
-								color: #cacbcd;
-								font-family: $font;
-								font-size: 20px;
-								font-style: normal;
-								font-weight: 400;
-								line-height: normal;
-								text-decoration-line: underline;
-							}
+						}
+						.ranking{
+							color: #d7d9df;
+							font-family: $font;
+							font-size: 25px;
+							font-style: normal;
+							font-weight: 400;
+							line-height: normal;
 						}
 					}
 				}
@@ -147,94 +203,6 @@
 				.left-config {
 					width: 100%;
 					height: auto;
-					.prop-desc-config {
-						width: 100%;
-						height: auto;
-						border-radius: 12px;
-						gap:10px;
-						.top {
-							width: 100%;
-							height: auto;
-							.title {
-								color: #eeeef0;
-								font-family: $font;
-								font-size: 20px;
-								font-style: normal;
-								font-weight: 500;
-								line-height: normal;
-								margin-bottom: 10px;
-							}
-							.desc {
-								color: #dedede;
-								font-family: $font;
-								font-size: 20px;
-								font-style: normal;
-								font-weight: 400;
-								line-height: 26px;
-							}
-							.category{
-								width: 88px;
-								color: #817e7e;
-								font-family: $font;
-								font-size: 18px;
-								text-decoration: underline;
-							}
-							.price {
-								margin-top: 30px;
-								width: 88px;
-								color: #ececec;
-								font-family: $font;
-								font-size: 25px;
-								font-style: normal;
-								font-weight: 400;
-								line-height: 35px;
-							}
-						.statistics {
-								.buttons {
-									width: auto;
-									height: auto;
-									flex-direction: row;
-									align-items: center;
-									gap: 15px;
-									margin: 30px 20px 27px 0;
-									p {
-										color: #ececec;
-										text-align: right;
-										font-family: $font;
-										font-size: 18px;
-										font-style: normal;
-										font-weight: 400;
-										line-height: normal;
-										letter-spacing: 0.52px;
-										text-transform: capitalize;
-									}
-									.button-box {
-										flex-direction: row;
-										gap: 5px;
-										align-items: center;
-										div{
-											color: #b5b4b4;
-											text-align: right;
-											font-family: $font;
-											font-size: 18px;
-											font-style: normal;
-											font-weight: 400;
-											line-height: normal;
-											letter-spacing: 0.82px;
-											text-transform: capitalize;
-										}
-									}
-								}
-							}
-
-						}
-						.divider{
-							width: 100%;
-							border: 1px rgb(120, 117, 117) solid;
-							margin-bottom: 30px;
-							
-						}
-					}
 					.address-config {
 						width: 100%;
 						height: auto;
